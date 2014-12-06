@@ -2,34 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/F:/Working/xampp/htdocs/sale/application/models/location.php</file>
-            <file>file:/F:/Working/xampp/htdocs/sale/application/modules/administrator/controllers/locations.php</file>
-            <file>file:/F:/Working/xampp/htdocs/sale/application/core/Admin_Controller.php</file>
-            <file>file:/F:/Working/xampp/htdocs/sale/bootstrap/css/bootstrap.min.css</file>
-            <file>file:/F:/Working/xampp/htdocs/sale/application/modules/administrator/controllers/hotel.php</file>
-            <file>file:/F:/Working/xampp/htdocs/sale/application/views/index.html</file>
-            <file>file:/F:/Working/xampp/htdocs/sale/application/models/services.php</file>
-            <file>file:/F:/Working/xampp/htdocs/sale/application/modules/administrator/controllers/transportation.php</file>
-            <file>file:/F:/Working/xampp/htdocs/sale/application/views/layout/backend_demo.php</file>
-            <file>file:/F:/Working/xampp/htdocs/sale/bootstrap/css/bootstrap.css</file>
-            <file>file:/F:/Working/xampp/htdocs/sale/application/modules/administrator/controllers/ajax.php</file>
-            <file>file:/F:/Working/xampp/htdocs/sale/application/views/demo.php</file>
-            <file>file:/F:/Working/xampp/htdocs/sale/application/modules/administrator/controllers/insurance.php</file>
-            <file>file:/F:/Working/xampp/htdocs/sale/application/core/mabstract.php</file>
-            <file>file:/F:/Working/xampp/htdocs/sale/application/modules/administrator/controllers/order.php</file>
-            <file>file:/F:/Working/xampp/htdocs/sale/application/modules/administrator/controllers/tour.php</file>
-            <file>file:/F:/Working/xampp/htdocs/sale/application/modules/administrator/controllers/restaurent.php</file>
-            <file>file:/F:/Working/xampp/htdocs/sale/application/views/layout/backend_default.php</file>
-            <file>file:/F:/Working/xampp/htdocs/sale/application/views/backend/elements/top_menu.php</file>
-            <file>file:/F:/Working/xampp/htdocs/sale/application/modules/administrator/views/services/list.php</file>
-            <file>file:/F:/Working/xampp/htdocs/sale/asset/public/css/style.css</file>
-            <file>file:/F:/Working/xampp/htdocs/sale/application/modules/administrator/views/order/list.php</file>
-            <file>file:/F:/Working/xampp/htdocs/sale/asset/public/css/dataTable.boostrap.css</file>
-            <file>file:/F:/Working/xampp/htdocs/sale/application/third_party/index.html</file>
-            <file>file:/F:/Working/xampp/htdocs/sale/application/core/MY_Controller.php</file>
-            <file>file:/F:/Working/xampp/htdocs/sale/application/models/services_price.php</file>
-            <file>file:/F:/Working/xampp/htdocs/sale/application/modules/administrator/views/location/list.php</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

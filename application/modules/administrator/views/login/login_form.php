@@ -2,7 +2,7 @@
     <div class="span2 pull-center">
         <div class="login-form">
             <?php if($flash_message) echo $flash_message."<br/>"; ?>
-            <form action="" method="post" id="login_form">
+            <form action="/administrator/login" method="post" id="login_form">
                 <h3>Đăng nhập</h3>   
                 <?php if(isset($error)): ?>
                 <div class="alert alert-error">
@@ -20,7 +20,7 @@
                     <div class="formRow">
                         <div class="input-prepend">
                             <span class="add-on"><i class="icon-lock"></i></span>
-                            <input type="password" id="password" name="UserPasswd" placeholder="Mật khẩu" value="" autocomplete="off"/>
+                            <input type="password" id="password" name="password" placeholder="Mật khẩu" value="" autocomplete="off"/>
                         </div>
                         <?php echo form_error('UserPasswd'); ?>
                     </div>

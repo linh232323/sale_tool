@@ -84,7 +84,7 @@ class User extends MY_Controller {
             $a_insert_row = array(
                 'UserFullName'   => trim($this->input->post('UserFullName')),
                 'UserName'       => trim($this->input->post('UserName')),
-                'UserSalt'       => $v_salt,
+                'usersalt'       => $v_salt,
                 'UserPasswd'     => md5($this->input->post('UserPasswd') . $v_salt),
                 'UserEmail'      => trim($this->input->post('UserEmail')),
                 //'UserAddress'    => $this->input->post('UserAddress'),
@@ -204,7 +204,7 @@ class User extends MY_Controller {
                 // Update UserPasswd, Remove Request Token
                 $a_update_row = array(
                     'UserRequestToken' => '',
-                    'UserPasswd'       => md5($this->input->post('UserPasswd') . $a_user->UserSalt)
+                    'UserPasswd'       => md5($this->input->post('UserPasswd') . $a_user->usersalt)
                 );
                 if ($this->muser->update($a_update_row, $a_user->UserId)) {
                     $this->app_data['is_reset'] = true;
@@ -338,7 +338,7 @@ class User extends MY_Controller {
         if ($a_user) {
             $userid = $a_user->UserId;
             if ($a_user->UserStatus == 'DEACTIVE') {
-                $v_salt = $a_user->UserSalt;
+                $v_salt = $a_user->usersalt;
                 if ($code == md5($email . $v_salt)) {
                     // Update UserStatus
                     $a_update_row = array('UserStatus' => 'ACTIVE');
@@ -420,7 +420,7 @@ class User extends MY_Controller {
                 $error = "Thành viên đã kích hoạt tài khoản.";
             }
             else {
-                $v_salt                        = $a_user->UserSalt;
+                $v_salt                        = $a_user->usersalt;
                 $s_code                        = md5($email . $v_salt);
                 $this->app_data['active_link'] = $this->app_base_url . 'default/user/validation?email=' . $email . '&code=' . $s_code;
 

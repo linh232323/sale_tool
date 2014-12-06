@@ -4,7 +4,7 @@ class muserlogin extends MY_Model {
 
     function __construct() {
         parent::__construct();
-        $this->_table = 'qhotraining_tbl_userlogin';
+        $this->_table = 'userlogin';
     }
 
     //--- Lấy tất cả dữ liệu
@@ -14,20 +14,20 @@ class muserlogin extends MY_Model {
         if ($limit != '' && $off != '') {
             $this->db->limit($off, $limit);
         }
-        $this->db->order_by('UserName', 'asc');
+        $this->db->order_by('username', 'asc');
         $query = $this->db->get();
         $data  = $query->result();
         return $data;
     }
 
     /**
-     * Lấy thông tin thông qua userid
-     * @param Int $userid
+     * Lấy thông tin thông qua id
+     * @param Int $id
      * @return boolean
      */
-    function getInfo($userid = '') {
-        if ($userid != '' && is_numeric($userid)) {
-            $this->db->where('UserId', $userid);
+    function getInfo($id = '') {
+        if ($id != '' && is_numeric($id)) {
+            $this->db->where('id', $id);
             $query = $this->db->get($this->_table);
 
             if ($query)
@@ -47,8 +47,8 @@ class muserlogin extends MY_Model {
      * @return boolean
      */
     function getLastLoginByIpAddress($ip_address) {
-        $this->db->where('UserLoginIPAddress', $ip_address);
-        $this->db->order_by('UserLoginId','desc');
+        $this->db->where('ipaddress', $ip_address);
+        $this->db->order_by('id','desc');
         $this->db->limit(1);
         $query = $this->db->get($this->_table);
         if ($query)
@@ -84,11 +84,11 @@ class muserlogin extends MY_Model {
 
     /**
      * Xóa user 
-     * @param Int $userid
+     * @param Int $id
      */
-    function delete($userid = '') {
-        if ($userid != '') {
-            $this->db->where_in('UserId', $userid);
+    function delete($id = '') {
+        if ($id != '') {
+            $this->db->where_in('id', $id);
             if ($this->db->delete($this->_table)) {
                 return TRUE;
             }
@@ -109,7 +109,7 @@ class muserlogin extends MY_Model {
      */
     function update($data = array(), $id = '') {
         if (!empty($data) && $id != '' && is_numeric($id)) {
-            $this->db->where('UserLoginId', $id);
+            $this->db->where('id', $id);
             if ($this->db->update($this->_table, $data))
                 return TRUE;
             else
@@ -123,17 +123,17 @@ class muserlogin extends MY_Model {
     /**
      * Kiểm tra thông tin username hợp lệ
      * @param String $username
-     * @param Int $userid
+     * @param Int $id
      * @return boolean
      */
-    function checkUser($username = '', $userid = '') {
-        if ($userid != '' && is_numeric($userid)) { //for update             
-            $this->db->where("UserName", $username);
-            $this->db->where("UserId !=", $id);
+    function checkUser($username = '', $id = '') {
+        if ($id != '' && is_numeric($id)) { //for update             
+            $this->db->where("username", $username);
+            $this->db->where("id !=", $id);
             $query = $this->db->get($this->_table);
         }
         else { //for add
-            $this->db->where("UserName", $username);
+            $this->db->where("username", $username);
             $query = $this->db->get($this->_table);
         }
 
@@ -147,20 +147,20 @@ class muserlogin extends MY_Model {
 
     /**
      * Kiểm tra đã kích hoạt hay chưa 
-     * @param Int $userid
+     * @param Int $id
      * @return boolean
      */
-    function checkActived($userid = '') {
-        if ($userid != '' && is_numeric($userid)) {
-            $db_query = "select UserId, UserStatus
+    function checkActived($id = '') {
+        if ($id != '' && is_numeric($id)) {
+            $db_query = "select id, status
                          from   $this->_table 
-                         where  UserId = $userid
+                         where  id = $id
                          limit  0,1";
             $query    = $this->db->query($db_query);
 
             if ($query->num_rows() > 0) {
                 $info = $query->row();
-                if ($info['UserStatus'] == 'ACTIVE')
+                if ($info['status'] == 'ACTIVE')
                     return TRUE;
                 else
                     return FALSE;
@@ -176,15 +176,15 @@ class muserlogin extends MY_Model {
 
     /**
      *  Kiểm tra thông tin user và key
-     * @param Int $userid
+     * @param Int $id
      * @param String $key
      * @return boolean
      */
-    function checkUserIdAndKey($userid, $key) {
-        if ($userid != '' && $key != '' && is_numeric($userid)) {
+    function checkidAndKey($id, $key) {
+        if ($id != '' && $key != '' && is_numeric($id)) {
 
-            $this->db->where('UserId', $userid);
-            $this->db->where('md5(UserSalt)', $key);
+            $this->db->where('id', $id);
+            $this->db->where('md5(usersalt)', $key);
             $query = $this->db->get($this->_table);
             if ($query->num_rows() != 0) {
 
@@ -202,18 +202,18 @@ class muserlogin extends MY_Model {
     /**
      * 
      * @param String $email
-     * @param Int $userid
+     * @param Int $id
      * @return boolean
      */
-    function checkEmail($email = '', $userid = '') {
+    function checkEmail($email = '', $id = '') {
 
-        if ($userid != '' && is_numeric($userid)) {  //use for update
-            $this->db->where('UserName', $email);
-            $this->db->where('UserId !=', $userid);
+        if ($id != '' && is_numeric($id)) {  //use for update
+            $this->db->where('username', $email);
+            $this->db->where('id !=', $id);
             $query = $this->db->get($this->_table);
         }
         else {   //user for add
-            $this->db->where('UserEmail', $email);
+            $this->db->where('email', $email);
             $query = $this->db->get($this->_table);
         }
 
@@ -231,11 +231,11 @@ class muserlogin extends MY_Model {
      * @param String $password
      * @return boolean
      */
-    function checkLogin($userid = '', $password = '') {
-        $u     = $userid;
+    function checkLogin($id = '', $password = '') {
+        $u     = $id;
         $p     = md5($password);
-        $this->db->where('UserId', $u);
-        $this->db->where('UserPasswd', $p);
+        $this->db->where('id', $u);
+        $this->db->where('password', $p);
         $query = $this->db->get($this->_table);
         if ($query->num_rows() == 0) {
             return FALSE;

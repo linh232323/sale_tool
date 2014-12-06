@@ -6,18 +6,18 @@ if (!defined('BASEPATH'))
 class My_Auth {
 
     private $_ci;
-    private $_sess_user   = 'sess_user';
+    private $_sess_user = 'sess_user';
     private $_cookie_user = 'user_login';
     public $isRememberMe = FALSE;
-    public $identity     = "";
-    public $credential   = "";
-    public $isValid      = FALSE;
-    public $error        = "";
-    public $userInfo     = array();
-    public $loginType          = 'Frontend';
-    public $userLoginId        = 0;
-    public $maxLoginAttempt    = 5; // Current Login Attempt
-    public $curLoginAttempt    = 0;
+    public $identity = "";
+    public $credential = "";
+    public $isValid = FALSE;
+    public $error = "";
+    public $userInfo = array();
+    public $logintype = 'Frontend';
+    public $userLoginId = 0;
+    public $maxLoginAttempt = 5; // Current Login Attempt
+    public $curLoginAttempt = 0;
     public $loginAttemptExceed = FALSE;
     public $loginFailBlockTime = 15; // 15 minutes;
 
@@ -43,8 +43,8 @@ class My_Auth {
 
     function authenticate() {
         $this->isValid = FALSE;
-        $email         = $this->identity;
-        $pass          = $this->credential;
+        $email = $this->identity;
+        $pass = $this->credential;
 
         // Check Login Attempt
         $this->loginAttemptCheck();
@@ -54,9 +54,11 @@ class My_Auth {
         }
 
         $a_user = $this->_ci->muser->getInfoByEmail($email);
+
         if ($a_user) {
-            $v_salt = $a_user->UserSalt;
-            if (md5(trim($pass) . $v_salt) == $a_user->UserPasswd) {
+            $v_salt = $a_user->usersalt;
+
+            if (md5(trim($pass) . $v_salt) == $a_user->password) {
                 $this->userInfo = $a_user;
 
                 // Reset Login Attempt Or Add Login Record
@@ -64,8 +66,7 @@ class My_Auth {
                     // Reset
                     $this->curLoginAttempt = 0;
                     $this->_updateLoginAttempt($this->userLoginId);
-                }
-                else {
+                } else {
                     // Add Login Record
                     $this->_addLoginRecord();
                 }
@@ -83,13 +84,11 @@ class My_Auth {
 
                 $this->isValid = TRUE;
                 return TRUE;
-            }
-            else {
+            } else {
 
                 $this->error = 'Thông tin đăng nhập không đúng.';
             }
-        }
-        else {
+        } else {
 
             $this->error = "Tài khoản không tồn tại.";
         }
@@ -101,8 +100,7 @@ class My_Auth {
         if ($this->userLoginId) {
             // Update
             $this->_updateLoginAttempt($this->userLoginId);
-        }
-        else {
+        } else {
             // Add Login Record
             $this->_addLoginRecord($email);
         }
@@ -110,8 +108,7 @@ class My_Auth {
         // Add More Error
         if ($this->isExccedLoginAttempt()) {
             $this->error .= ' Bạn đã đăng nhập thất bại vượt quá số lần qui định vui lòng thử lại sau ' . $this->loginFailBlockTime . ' phút.';
-        }
-        else {
+        } else {
             $this->error .= ' Bạn đã đăng nhập sai ' . $this->curLoginAttempt
                     . ' lần. Nếu bạn sai liên tiếp ' . $this->maxLoginAttempt
                     . ' lần. Bạn phải thử lại sau ' . $this->loginFailBlockTime . ' phút.';
@@ -124,12 +121,12 @@ class My_Auth {
     }
 
     function loginFrontend() {
-        $this->loginType = 'Frontend';
+        $this->logintype = 'Frontend';
         return $this;
     }
 
     function loginBackend() {
-        $this->loginType = 'Backend';
+        $this->logintype = 'Backend';
         return $this;
     }
 
@@ -137,21 +134,10 @@ class My_Auth {
         if (!$ip_address) {
             $ip_address = $this->_ci->input->ip_address();
         }
-        $a_login    = $this->_ci->muserlogin->getLastLoginByIpAddress($ip_address);
+        $a_login = $this->_ci->muserlogin->getLastLoginByIpAddress($ip_address);
         if ($a_login) {
-
-            // Check Last Login Time
-            $last_login = strtotime($a_login->UserLoginDate);
-            if ($last_login >= time() - $this->loginFailBlockTime * 60) {
-                $this->userLoginId     = $a_login->UserLoginId;
-                $this->curLoginAttempt = $a_login->UserLoginAttempt;
-                return $this->isExccedLoginAttempt();
-            }
-            else {
-                return TRUE;
-            }
-        }
-        else {
+            return TRUE;
+        } else {
             return TRUE;
         }
     }
@@ -166,12 +152,11 @@ class My_Auth {
     function isLogin() {
         // Check the User Session
         $a_user = $this->getUserSession();
-        //print_r($a_user);
-        if (!empty($a_user) && isset($a_user['UserId']) && isset($a_user['session_id'])) {
+        
+        if (!empty($a_user) && isset($a_user['id']) && isset($a_user['session_id'])) {
             $this->userInfo = $a_user;
             return TRUE;
-        }
-        else {
+        } else {
             // Check Cookie 
             $s_cookie = $this->_getUserLoginCookie();
             if ($s_cookie != '') {
@@ -187,8 +172,7 @@ class My_Auth {
                         $this->_updateUserLastLogin(); // Update new Login Time, Session Id
                         $this->userInfo = $this->getUserSession();
                         return TRUE;
-                    }
-                    else {
+                    } else {
                         $this->userLogout(); // Destroy Bad Cookie;
                     }
                 }
@@ -203,8 +187,8 @@ class My_Auth {
      */
     function isMultipleLogin() {
         if ($this->isLogin()) {
-            $a_user     = $this->getUserSession();
-            $u          = $a_user['UserId'];
+            $a_user = $this->getUserSession();
+            $u = $a_user['id'];
             $session_id = $a_user['session_id'];
             if ($this->_ci->muser->checkLoginSession($u, $session_id)) {
                 return FALSE;
@@ -228,37 +212,43 @@ class My_Auth {
         delete_cookie($this->_cookie_user);
     }
 
+    function isMember() {
+        if (isset($this->userInfo['type']) && $this->userInfo['type'] == 'MEMBER' || $this->userInfo['type'] == 'ADMIN')
+            return TRUE;
+        else
+            return FALSE;
+    }
+
     function isAdmin() {
-        if (isset($this->userInfo['UserType']) && $this->userInfo['UserType'] == 'ADMIN')
+        if (isset($this->userInfo['type']) && $this->userInfo['type'] == 'ADMIN')
             return TRUE;
         else
             return FALSE;
     }
 
     function isBackend() {
-        if (isset($this->userInfo['loginType']) && $this->userInfo['loginType'] == 'Backend')
+        if (isset($this->userInfo['logintype']) && $this->userInfo['logintype'] == 'Backend')
             return TRUE;
         else
             return FALSE;
     }
+
     private function _addLoginRecord($email = '') {
         $a_user = $this->userInfo;
         if (empty($a_user)) {
-            $userID   = 0;
+            $userID = 0;
             $username = 'Unknown';
-        }
-        else {
-            $userID      = $a_user->UserId;
-            $username    = $a_user->UserName;
+        } else {
+            $userID = $a_user->id;
+            $username = $a_user->username;
         }
         $a_userlogin = array(
-            'UserId'             => $userID,
-            'UserName'           => $username,
-            'UserLoginType'      => $this->loginType,
-            'UserLoginIPAddress' => $this->_ci->input->ip_address(),
-            'UserLoginAttempt'   => $this->curLoginAttempt,
-            'UserLoginEmail'     => $email,
-            'UserLoginDate'      => datetimeNow()
+            'id' => $userID,
+            'username' => $username,
+            'logintype' => $this->logintype,
+            'ipaddress' => $this->_ci->input->ip_address(),
+            'loginattempt' => $this->curLoginAttempt,
+            'email' => $email
         );
         return
                 $this->_ci->muserlogin->add($a_userlogin);
@@ -266,24 +256,24 @@ class My_Auth {
 
     private function _updateLoginAttempt() {
         $a_userlogin = array(
-            'UserLoginAttempt' => $this->curLoginAttempt,
-            'UserLoginDate'    => datetimeNow()
+            'loginattempt' => $this->curLoginAttempt,
+            'UserLoginDate' => datetimeNow()
         );
         return $this->_ci->muserlogin->update($a_userlogin, $this->userLoginId);
     }
 
     private function _createUserSession() {
         $a_userInfo = $this->userInfo;
-        $a_user     = array(
-            'UserId'        => $a_userInfo->UserId,
-            'UserName'      => $a_userInfo->UserName,
-            'UserEmail'     => $a_userInfo->UserEmail,
-            'UserStatus'    => $a_userInfo->UserStatus,
-            'UserType'      => $a_userInfo->UserType,
-            'UserFullName'  => $a_userInfo->UserFullName,
-            'UserIpAddress' => $this->_ci->input->ip_address(),
-            'session_id'    => $this->_ci->session->userdata('session_id'), // Prevent Session Id change by CI
-            'loginType'     => $this->loginType
+        $a_user = array(
+            'id' => $a_userInfo->id,
+            'username' => $a_userInfo->username,
+            'useremail' => $a_userInfo->email,
+            'status' => $a_userInfo->status,
+            'type' => $a_userInfo->type,
+            'name' => $a_userInfo->name,
+            'ipaddress' => $this->_ci->input->ip_address(),
+            'session_id' => $this->_ci->session->userdata('session_id'), // Prevent Session Id change by CI
+            'logintype' => $this->logintype
         );
         $this->_ci->session->set_userdata($this->_sess_user, $a_user);
 
@@ -292,15 +282,15 @@ class My_Auth {
 
     private function _createUserLoginCookie() {
         $a_user = array(
-            'userid' => $this->userInfo->UserId,
-            'passwd' => $this->userInfo->UserPasswd);
+            'userid' => $this->userInfo->id,
+            'passwd' => $this->userInfo->password);
 
         $a_cookie = array(
-            'name'   => $this->_cookie_user,
-            'value'  => $this->_ci->encrypt->encode(json_encode($a_user)),
+            'name' => $this->_cookie_user,
+            'value' => $this->_ci->encrypt->encode(json_encode($a_user)),
             'expire' => 7 * 24 * 60 * 60,
             //'domain' => '.some-domain.com',
-            'path'   => '/',
+            'path' => '/',
                 //'secure' => TRUE
         );
         $this->_ci->input->set_cookie($a_cookie);
@@ -311,13 +301,7 @@ class My_Auth {
     }
 
     private function _updateUserLastLogin() {
-        $a_user = array(
-            'UserLastIPAddress'  => $this->_ci->input->ip_address(),
-            'UserLastLoginDate'  => datetimeNow(),
-            'UserLoginSessionId' => $this->_ci->session->userdata('session_id'),
-            'UserTotalLogin'     => $this->userInfo->UserTotalLogin + 1
-        );
-        return $this->_ci->muser->update($a_user, $this->userInfo->UserId);
+        
     }
 
 }

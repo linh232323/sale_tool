@@ -2,19 +2,17 @@
 <div class="row-fluid">
     <form action="" method="post" class="form-horizontal" >
         <legend>Username</legend>
-        <div class="control-group">
-            <label class="control-label" >Filename</label>
-            <div class="controls">
-                <input type="text" id="FileName" placeholder="Filename" name="FileName" value="<?php echo set_value('FileName',$user->FileName);?>" />                                    
-                <input type="hidden" id="UserId" name="UserId" value="<?php echo $user->UserId;?>" />
+        <div class="control-group">            
+            <div class="controls">                
+                <input type="hidden" id="id" name="id" value="<?php echo $user->id;?>" />
                 <?php echo form_error('UserFullName'); ?>                                
             </div>
         </div>
         <div class="control-group">
             <label class="control-label" >User Name</label>
             <div class="controls">
-                <input type="text" id="UserName" placeholder="User Name" name="UserName" value="<?php echo set_value('UserName',$user->UserName);?>" />                                    
-                <?php echo form_error('UserName'); ?>
+                <input type="text" id="username" placeholder="User Name" name="username" value="<?php echo set_value('username',$user->username);?>" />                                    
+                <?php echo form_error('username'); ?>
                 <br class="clearfix"/>
                 <em class="muted">Thông tin đăng nhập của user</em>
             </div>
@@ -22,22 +20,22 @@
         <div class="control-group">
             <label class="control-label">Password</label>
             <div class="controls">
-                <input type="password" id="UserPasswd" placeholder="Password" name="UserPasswd" value="<?php echo set_value("UserPasswd");?>" />
-                <?php echo form_error('UserPasswd'); ?>                
+                <input type="password" id="password" placeholder="Password" name="password" value="<?php echo set_value("password");?>" />
+                <?php echo form_error('password'); ?>                
             </div>
         </div>
         <div class="control-group">
             <label class="control-label">Email</label>
             <div class="controls">
-                <input type="email" id="UserEmail" placeholder="Email" name="UserEmail" value="<?php echo set_value("UserEmail",$user->UserEmail);?>" />
-                <?php echo form_error('UserEmail'); ?>
+                <input type="email" id="email" placeholder="Email" name="email" value="<?php echo set_value("email",$user->email);?>" />
+                <?php echo form_error('email'); ?>
             </div>
         </div>
         <div class="control-group">
             <label class="control-label" >Phone</label>
             <div class="controls">
-                <input type="tel" placeholder="Phone" id="UserPhone" name="UserPhone" value="<?php echo set_value("UserPhone",$user->UserPhone);?>" />
-                <?php echo form_error('UserPhone'); ?> 
+                <input type="tel" placeholder="Phone" id="phone" name="phone" value="<?php echo set_value("phone",$user->phone);?>" />
+                <?php echo form_error('phone'); ?> 
             </div>
         </div>
         <div class="control-group">
@@ -50,8 +48,8 @@
         <div class="control-group">
             <label class="control-label" >Address</label>
             <div class="controls">
-                <textarea class="span4" rows="5" placeholder="Address" id="UserAddress" name="UserAddress"><?php echo set_value("UserAddress",$user->UserAddress);?></textarea>
-                <?php echo form_error('UserAddress'); ?> 
+                <textarea class="span4" rows="5" placeholder="Address" id="address" name="address"><?php echo set_value("address",$user->address);?></textarea>
+                <?php echo form_error('address'); ?> 
             </div>
         </div>
         <div class="control-group">

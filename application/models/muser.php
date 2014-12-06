@@ -27,7 +27,7 @@ class muser extends MY_Model {
      */
     function getInfo($userid = '') {
         if ($userid != '' && is_numeric($userid)) {
-            $this->db->where('UserId', $userid);
+            $this->db->where('id', $userid);
             $query = $this->db->get($this->_table);
 
             if ($query)
@@ -46,7 +46,7 @@ class muser extends MY_Model {
      * @return boolean
      */
     function getInfoByEmail($email) {
-        $this->db->where('UserEmail', $email);
+        $this->db->where('email', $email);
         $query = $this->db->get($this->_table);
 
         if ($query)
@@ -66,7 +66,7 @@ class muser extends MY_Model {
     function checkUser($username = '', $userid = '') {
         if ($userid != '' && is_numeric($userid)) { //for update             
             $this->db->where("UserName", $username);
-            $this->db->where("UserId !=", $id);
+            $this->db->where("id !=", $id);
             $query = $this->db->get($this->_table);
         }
         else { //for add
@@ -89,9 +89,9 @@ class muser extends MY_Model {
      */
     function checkActived($userid = '') {
         if ($userid != '' && is_numeric($userid)) {
-            $db_query = "select UserId, UserStatus
+            $db_query = "select id, UserStatus
                          from   $this->_table 
-                         where  UserId = $userid
+                         where  id = $userid
                          limit  0,1";
             $query    = $this->db->query($db_query);
 
@@ -117,11 +117,11 @@ class muser extends MY_Model {
      * @param String $key
      * @return boolean
      */
-    function checkUserIdAndKey($userid, $key) {
+    function checkidAndKey($userid, $key) {
         if ($userid != '' && $key != '' && is_numeric($userid)) {
 
-            $this->db->where('UserId', $userid);
-            $this->db->where('md5(UserSalt)', $key);
+            $this->db->where('id', $userid);
+            $this->db->where('md5(usersalt)', $key);
             $query = $this->db->get($this->_table);
             if ($query->num_rows() != 0) {
 
@@ -146,11 +146,11 @@ class muser extends MY_Model {
 
         if ($userid != '' && is_numeric($userid)) {  //use for update
             $this->db->where('UserName', $email);
-            $this->db->where('UserId !=', $userid);
+            $this->db->where('id !=', $userid);
             $query = $this->db->get($this->_table);
         }
         else {   //user for add
-            $this->db->where('UserEmail', $email);
+            $this->db->where('email', $email);
             $query = $this->db->get($this->_table);
         }
 
@@ -169,11 +169,12 @@ class muser extends MY_Model {
      * @return boolean
      */
     function checkLogin($userid = '', $password = '') {
+      
         $u     = $userid;
         //$p     = md5($password);
         $p     = $password;
-        $this->db->where('UserId', $u);
-        $this->db->where('UserPasswd', $p);
+        $this->db->where('id', $u);
+        $this->db->where('password', $p);
         $query = $this->db->get($this->_table);
         if ($query->num_rows() == 0) {
             return FALSE;
@@ -184,8 +185,8 @@ class muser extends MY_Model {
     }
 
     function checkLoginSession($userid = '', $session_id =''){
-        $this->db->where('UserId', $userid);
-        $this->db->where('UserLoginSessionId', $session_id);
+        $this->db->where('id', $userid);
+        $this->db->where('session_id', $session_id);
         $query = $this->db->get($this->_table);
         if ($query->num_rows() == 0) {
             return FALSE;
