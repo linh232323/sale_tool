@@ -20,7 +20,7 @@ class Admin_Controller extends MY_Controller {
         if ($this->app_controller != 'login') {
            
             if (!$this->my_auth->isLogin()) {
-               redirect($this->app_data['login_url']);
+            //   redirect($this->app_data['login_url']);
             }
             else {
                 $this->app_data['userInfo'] = $this->my_auth->getUserSession();
