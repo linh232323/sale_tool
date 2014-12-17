@@ -2,13 +2,15 @@
     
     if( ! function_exists('toSelection'))
     {
-        function getLevelToSelection($collection, $currentId = null, $class = "" , $id = "")
+        function toSelection($collection, $currentId = null, $class = "" , $id = "", $name = "")
         {
             $html = '';
-            $html .= "<select class= \"{$class}\" id= \"{$id}\">";
+            $html .= "<select name=\"{$name}\" class= \"{$class}\" id= \"{$id}\">";
+            $html .= "<option value=\"0\">--- None ---</option>";
             foreach($collection as $item){
-                $html .= "<option ". (($item->id === $currentId)? "" : "checked") . "value=\"{$item->id}\">{$item->name}</option>"
+                $html .= "<option ". (($item->id == $currentId)? "selected " : "") . "value=\"{$item->id}\">{$item->name}</option>";
             }
+            $html .= "</select>";
             return $html;
         }
         

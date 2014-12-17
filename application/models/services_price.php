@@ -6,7 +6,17 @@ class services_price extends mabstract {
         parent::__construct();
         $this->_table = 'services_price';
     }
-
+    function getAllPriceByServiceId( $service_id ,$off = '', $limit = '') {
+        
+        $this->db->select( );
+        
+        $this->db->from($this->_table);
+        $this->db->where('service_id',$service_id);
+        $query = $this->db->get();        
+        $data = $query->result();        
+        return $data;
+    }
+    
     function getAllPriceLevel($service_type, $service_id, $from_date, $to_date, $off = '', $limit = '') {
         $this->db->select($this->_table.'.id' . ' as id' );
         $this->db->select('services_level.id as level_id' );

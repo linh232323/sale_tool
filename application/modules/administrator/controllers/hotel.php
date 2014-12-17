@@ -14,7 +14,7 @@ class Hotel extends Admin_Controller {
         $headers_price = array();
         $services = array();
         $this->app_data['title'] = 'Hotel';
-        $this->app_data['controller'] = 'hotel';
+        $this->app_data['controller'] = 'servicesitem';
         $this->app_data['headers_price'] = array(
             'id' => '#',
             'name' => 'Name',

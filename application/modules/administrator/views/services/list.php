@@ -39,12 +39,7 @@
         <?php endforeach; ?>
     </tbody>
     <tfoot>
-        <tr>
-            <th colspan="20">
-                <button type="submit" class="btn btn-primary "><i class="icon-plus-sign icon-white"></i> Add New</button>
-            </th>
-        </tr>
-
+        
 
     </tfoot>
 </table>    

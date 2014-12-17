@@ -15,7 +15,7 @@ class Restaurent extends Admin_Controller {
         $services = array();
         
         $this->app_data['title'] = 'Restaurent';
-        $this->app_data['controller'] = 'restaurent';
+        $this->app_data['controller'] = 'servicesitem';
         
         $this->app_data['headers_price'] = array(
             'id' => '#',

@@ -15,7 +15,7 @@ class Tour extends Admin_Controller {
         $services = array();
         
         $this->app_data['title'] = 'Tour';
-        $this->app_data['controller'] = 'tour';
+        $this->app_data['controller'] = 'servicesitem';
         
         $this->app_data['headers_price'] = array(
             'id' => '#',

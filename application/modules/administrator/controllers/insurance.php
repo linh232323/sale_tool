@@ -15,7 +15,7 @@ class Insurance extends Admin_Controller {
         $services = array();
         
         $this->app_data['title'] = 'Insurance';
-        $this->app_data['controller'] = 'insurance';
+        $this->app_data['controller'] = 'servicesitem';
         
         $this->app_data['headers_price'] = array(
             'id' => '#',

@@ -20,7 +20,7 @@ $a_top_menu = array(
         'submenu' => array(
             array(
                 'name' => 'New',
-                'url'  => '/index.php/administrator/hotel/create'
+                'url'  => '/index.php/administrator/servicesitem/add_service?id=1'
             ),
             array(
                 'name' => 'List',
@@ -34,7 +34,7 @@ $a_top_menu = array(
         'submenu' => array(
             array(
                 'name' => 'New',
-                'url'  => '/index.php/administrator/restaurent/create'
+                'url'  => '/index.php/administrator/servicesitem/add_service?id=2'
             ),
             array(
                 'name' => 'List',
@@ -48,7 +48,7 @@ $a_top_menu = array(
         'submenu' => array(
             array(
                 'name' => 'New',
-                'url'  => '/index.php/administrator/transportation/create'
+                'url'  => '/index.php/administrator/servicesitem/add_service?id=3'
             ),
             array(
                 'name' => 'List',
@@ -62,7 +62,7 @@ $a_top_menu = array(
         'submenu' => array(
             array(
                 'name' => 'New',
-                'url'  => '/index.php/administrator/tour/create'
+                'url'  => '/index.php/administrator/servicesitem/add_service?id=4'
             ),
             array(
                 'name' => 'List',
@@ -76,7 +76,7 @@ $a_top_menu = array(
         'submenu' => array(
             array(
                 'name' => 'New',
-                'url'  => '/index.php/administrator/insurance/create'
+                'url'  => '/index.php/administrator/servicesitem/add_service?id=5'
             ),
             array(
                 'name' => 'List',
