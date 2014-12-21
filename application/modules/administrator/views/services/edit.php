@@ -74,7 +74,7 @@
                                             echo "<input id=\"{$key}\" name=\"{$key}\" type=\"text\" class=\"span12 {$key}\" value=\"" . $row[$key]['value'] . "\" />";
                                             break;
                                         case 'input-date':
-                                            echo "<input id=\"{$key}\"  name=\"{$key}\" type=\"date\" class=\"datepicker span12 {$key}\" value=\"" . $row[$key]['value'] . "\" />";
+                                            echo "<input id=\"{$key}\"  name=\"{$key}\" type=\"text\" class=\"datepicker span12 {$key}\" value=\"" . $row[$key]['value'] . "\" />";
                                             break;
                                         case 'select':
                                             echo $row[$key]['value'];
