@@ -131,9 +131,9 @@ class Ajax extends Admin_Controller {
     function getServicePrice() {
         $result = array();
 
-        $_service_id = $this->input->post('cruise-from-id', TRUE);
-        $_service_type = $this->input->post('cruise-from-id', TRUE);        
-        $_from = $_to = $this->input->post('cruise-from-id', TRUE);        
+        $_service_id = $this->input->post('service_id', TRUE);
+        $_service_type = $this->input->post('service_type_id', TRUE);
+        $_from = $_to = $this->input->post('date_from', TRUE);
 
         $_services_prices = $this->services_price->getAllPriceLevel($_service_type, $_service_id, $_from, $_to);
 

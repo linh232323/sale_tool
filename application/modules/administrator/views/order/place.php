@@ -145,11 +145,19 @@
                     var cruise_id = target.closest('.cruise').find('.cruise-id').val();
                     var cruise_to_id = target.closest('.cruise').find('.cruise-to-id').val();
                     var cruise_from_id = target.closest('.cruise').find('.cruise-from-id').val();
+                    var date_from = target.closet('.tour-date').find('.tour-date-name').val();
+
                     $.ajax({
                         url: '/index.php/administrator/ajax/getServicePrice',
                         type: 'POST',
                         dataType: 'JSON',
-                        data: 'query=' + query + '&type=' + type + '&id=' + service_id + '&cruise_id=' + cruise_id + '&cruise_to_id=' + cruise_to_id + '&cruise_from_id=' + cruise_from_id,
+                        data: 'query=' + query +
+                        '&service_type_id=' + type +
+                        '&service_id=' + service_id +
+                        '&cruise_id=' + cruise_id +
+                        '&cruise_to_id=' + cruise_to_id +
+                        '&cruise_from_id=' + cruise_from_id +
+                        '&date_from=" + date_from,
                         success: function (data) {
                             labels = [];
                             mapped = {};
