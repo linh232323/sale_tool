@@ -37,7 +37,7 @@ class Transportation extends Admin_Controller {
                 'id' => $item->id,
                 'name' => $item->service_name,
                 'from' => $item->date_from,
-                'to' => $item->date_from,
+                'to' => $item->date_to,
                 'price_net' => $item->price_net,
                 'price_percent' => $item->price_percent,
                 'price_gross' => $item->price_gross,

@@ -2,7 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b41dcdf9-227e-4197-a3da-c0de0895a69b" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/administrator/controllers/hotel.php" afterPath="$PROJECT_DIR$/application/modules/administrator/controllers/hotel.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/administrator/controllers/insurance.php" afterPath="$PROJECT_DIR$/application/modules/administrator/controllers/insurance.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/administrator/controllers/restaurent.php" afterPath="$PROJECT_DIR$/application/modules/administrator/controllers/restaurent.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/services_price.php" afterPath="$PROJECT_DIR$/application/models/services_price.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/administrator/controllers/servicesitem.php" afterPath="$PROJECT_DIR$/application/modules/administrator/controllers/servicesitem.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/administrator/controllers/tour.php" afterPath="$PROJECT_DIR$/application/modules/administrator/controllers/tour.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/administrator/controllers/transportation.php" afterPath="$PROJECT_DIR$/application/modules/administrator/controllers/transportation.php" />
     </list>
     <ignored path="sale.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -27,21 +33,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="servicesitem.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/modules/administrator/controllers/servicesitem.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.2" vertical-offset="450" max-vertical-offset="2580">
-              <caret line="37" column="32" selection-start-line="37" selection-start-column="32" selection-end-line="37" selection-end-column="32" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="services_price.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/models/services_price.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.78700364" vertical-offset="1051" max-vertical-offset="2160">
-              <caret line="41" column="68" selection-start-line="41" selection-start-column="68" selection-end-line="41" selection-end-column="68" />
+            <state vertical-scroll-proportion="0.6209386" vertical-offset="1051" max-vertical-offset="2160">
+              <caret line="93" column="8" selection-start-line="93" selection-start-column="8" selection-end-line="93" selection-end-column="8" />
               <folding />
             </state>
           </provider>
@@ -56,6 +52,11 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/application/modules/administrator/controllers/servicesitem.php" />
+        <option value="$PROJECT_DIR$/application/modules/administrator/controllers/hotel.php" />
+        <option value="$PROJECT_DIR$/application/modules/administrator/controllers/insurance.php" />
+        <option value="$PROJECT_DIR$/application/modules/administrator/controllers/tour.php" />
+        <option value="$PROJECT_DIR$/application/modules/administrator/controllers/transportation.php" />
+        <option value="$PROJECT_DIR$/application/modules/administrator/controllers/restaurent.php" />
         <option value="$PROJECT_DIR$/application/models/services_price.php" />
       </list>
     </option>
@@ -393,16 +394,56 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/application/modules/administrator/controllers/servicesitem.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.2" vertical-offset="450" max-vertical-offset="2580">
-          <caret line="37" column="32" selection-start-line="37" selection-start-column="32" selection-end-line="37" selection-end-column="32" />
+        <state vertical-scroll-proportion="0.35198557" vertical-offset="300" max-vertical-offset="2520">
+          <caret line="33" column="59" selection-start-line="33" selection-start-column="59" selection-end-line="33" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/modules/administrator/controllers/hotel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5956679" vertical-offset="225" max-vertical-offset="1260">
+          <caret line="37" column="38" selection-start-line="37" selection-start-column="38" selection-end-line="37" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/modules/administrator/controllers/insurance.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6768953" vertical-offset="210" max-vertical-offset="1290">
+          <caret line="39" column="38" selection-start-line="39" selection-start-column="38" selection-end-line="39" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/modules/administrator/controllers/tour.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.2166065" vertical-offset="465" max-vertical-offset="1290">
+          <caret line="39" column="38" selection-start-line="39" selection-start-column="38" selection-end-line="39" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/modules/administrator/controllers/transportation.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6768953" vertical-offset="210" max-vertical-offset="1290">
+          <caret line="39" column="38" selection-start-line="39" selection-start-column="38" selection-end-line="39" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/modules/administrator/controllers/restaurent.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6768953" vertical-offset="210" max-vertical-offset="1290">
+          <caret line="39" column="38" selection-start-line="39" selection-start-column="38" selection-end-line="39" selection-end-column="38" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/models/services_price.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.78700364" vertical-offset="1051" max-vertical-offset="2160">
-          <caret line="41" column="68" selection-start-line="41" selection-start-column="68" selection-end-line="41" selection-end-column="68" />
+        <state vertical-scroll-proportion="0.6209386" vertical-offset="1051" max-vertical-offset="2160">
+          <caret line="93" column="8" selection-start-line="93" selection-start-column="8" selection-end-line="93" selection-end-column="8" />
           <folding />
         </state>
       </provider>

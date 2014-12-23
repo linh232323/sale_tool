@@ -91,7 +91,7 @@ class services_price extends mabstract {
                      WHERE
                          rn <= 5
                      ORDER BY service_id , date_to DESC";
-        echo $strQuery;
+        
         $query = $this->db->query($strQuery);
         $data = $query->result();        
         return $data;
