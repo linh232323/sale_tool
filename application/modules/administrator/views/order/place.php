@@ -145,7 +145,7 @@
                     var cruise_id = target.closest('.cruise').find('.cruise-id').val();
                     var cruise_to_id = target.closest('.cruise').find('.cruise-to-id').val();
                     var cruise_from_id = target.closest('.cruise').find('.cruise-from-id').val();
-                    var date_from = target.closet('.tour-date').find('.tour-date-name').val();
+                    var date_from = target.closest('.tour-date').find('.tour-date-name').val();
 
                     $.ajax({
                         url: '/index.php/administrator/ajax/getServicePrice',
