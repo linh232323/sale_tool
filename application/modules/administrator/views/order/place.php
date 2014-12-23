@@ -157,7 +157,7 @@
                         '&cruise_id=' + cruise_id +
                         '&cruise_to_id=' + cruise_to_id +
                         '&cruise_from_id=' + cruise_from_id +
-                        '&date_from=" + date_from,
+                        '&date_from=' + date_from,
                         success: function (data) {
                             labels = [];
                             mapped = {};

@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b41dcdf9-227e-4197-a3da-c0de0895a69b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/administrator/controllers/ajax.php" afterPath="$PROJECT_DIR$/application/modules/administrator/controllers/ajax.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/administrator/views/order/place.php" afterPath="$PROJECT_DIR$/application/modules/administrator/views/order/place.php" />
     </list>
     <ignored path="sale.iws" />
@@ -58,21 +57,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ajax.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ajax.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/modules/administrator/controllers/ajax.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.44592032" vertical-offset="1775" max-vertical-offset="3120">
+            <state vertical-scroll-proportion="-4.519231" vertical-offset="1775" max-vertical-offset="3120">
               <caret line="134" column="58" selection-start-line="134" selection-start-column="58" selection-end-line="134" selection-end-column="58" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="place.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="place.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/modules/administrator/views/order/place.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.5384617" vertical-offset="2045" max-vertical-offset="6000">
-              <caret line="159" column="35" selection-start-line="159" selection-start-column="26" selection-end-line="159" selection-end-column="35" />
+            <state vertical-scroll-proportion="0.6451613" vertical-offset="2045" max-vertical-offset="6000">
+              <caret line="159" column="37" selection-start-line="159" selection-start-column="37" selection-end-line="159" selection-end-column="37" />
               <folding />
             </state>
           </provider>
@@ -93,8 +92,8 @@
         <option value="$PROJECT_DIR$/application/modules/administrator/controllers/restaurent.php" />
         <option value="$PROJECT_DIR$/application/models/services_price.php" />
         <option value="$PROJECT_DIR$/application/modules/administrator/controllers/servicesitem.php" />
-        <option value="$PROJECT_DIR$/application/modules/administrator/views/order/place.php" />
         <option value="$PROJECT_DIR$/application/modules/administrator/controllers/ajax.php" />
+        <option value="$PROJECT_DIR$/application/modules/administrator/views/order/place.php" />
       </list>
     </option>
   </component>
@@ -557,18 +556,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/modules/administrator/views/order/place.php">
+    <entry file="file://$PROJECT_DIR$/application/modules/administrator/controllers/ajax.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.5384617" vertical-offset="2045" max-vertical-offset="6000">
-          <caret line="159" column="35" selection-start-line="159" selection-start-column="26" selection-end-line="159" selection-end-column="35" />
+        <state vertical-scroll-proportion="-4.519231" vertical-offset="1775" max-vertical-offset="3120">
+          <caret line="134" column="58" selection-start-line="134" selection-start-column="58" selection-end-line="134" selection-end-column="58" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/modules/administrator/controllers/ajax.php">
+    <entry file="file://$PROJECT_DIR$/application/modules/administrator/views/order/place.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.44592032" vertical-offset="1775" max-vertical-offset="3120">
-          <caret line="134" column="58" selection-start-line="134" selection-start-column="58" selection-end-line="134" selection-end-column="58" />
+        <state vertical-scroll-proportion="0.6451613" vertical-offset="2045" max-vertical-offset="6000">
+          <caret line="159" column="37" selection-start-line="159" selection-start-column="37" selection-end-line="159" selection-end-column="37" />
           <folding />
         </state>
       </provider>
