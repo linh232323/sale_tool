@@ -28,8 +28,8 @@ class services_price extends mabstract {
         $this->db->from($this->_table);
         $this->db->where($this->_table.'.service_type_id', $service_type);
         $this->db->where('service_id', $service_id);        
-        $this->db->where('date_from <=', $from_date,FALSE);
-        $this->db->or_where('date_to >=', $to_date,FALSE);
+        //$this->db->where('date_from <=', $from_date,FALSE);
+        //$this->db->or_where('date_to >=', $to_date,FALSE);
         $this->db->join('services_level', 'services_level.id = services_price.service_level');
         
         $query = $this->db->get();        
