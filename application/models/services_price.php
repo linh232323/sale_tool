@@ -40,7 +40,7 @@ class services_price extends mabstract {
         
     }    
     function getAllByType($type_id,$from_date,$to_date){
-        $this->db->select($this->_table.'.id' . ' as id' );
+        /*$this->db->select($this->_table.'.id' . ' as id' );
         $this->db->select('services_level.id as level_id' );
         $this->db->select('services_level.name as level_name');
         $this->db->select('services.id as service_id' );
@@ -62,8 +62,25 @@ class services_price extends mabstract {
         $this->db->or_where('date_to <=', $to_date,false);
         $this->db->join('services_level', 'services_level.id = services_price.service_level');
         $this->db->join('services', 'services.id = services_price.service_id');
-        
-        $query = $this->db->get();        
+        $query = $this->db->get(); */
+
+        $strQuery =
+
+              "select top 5 *,
+              from " . $this->_table . "
+              where (
+                 select f.*,services.name as service_name, services_level.name as level_name
+                 from `" . $this->_table . "`  as f
+                 where
+                 f.`id` = ".$this->_table.".id and
+                 f.`service_type_id` = {$type_id} and
+                 (f.`date_from` < \"{$from_date}\" or f.`date_to` < \"{$to_date}\")
+                 inner join `services` on `services`.`service_id` = f.`service_id`
+                 inner join `services_level` on `services_level`.`id` = f.`service_level`
+              )
+        ";
+        echo $strQuery;
+        $query = $this->db-query($strQuery);
         $data = $query->result();        
         return $data;
     }
