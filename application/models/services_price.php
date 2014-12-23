@@ -93,7 +93,7 @@ class services_price extends mabstract {
                      ORDER BY service_id , date_to DESC";
 
         echo $strQuery;
-        $query = $this->db-query($strQuery);
+        $query = $this->db->query($strQuery);
         $data = $query->result();        
         return $data;
     }
