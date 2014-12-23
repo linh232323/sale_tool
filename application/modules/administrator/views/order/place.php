@@ -142,7 +142,7 @@
                     var target = $this;
                     var type = target.closest('.cruise-services-type-items').find('.services-type').val();
                     var service_id = target.closest('.services-items-form').find('.services-id').val();
-                    var cruise_id = target.closest('.cruise-services-type-items').find('.cruise-id').val();
+                    var cruise_id = target.closest('.cruise').find('.cruise-id').val();
                     var cruise_to_id = target.closest('.cruise').find('.cruise-to-id').val();
                     var cruise_from_id = target.closest('.cruise').find('.cruise-from-id').val();
                     $.ajax({

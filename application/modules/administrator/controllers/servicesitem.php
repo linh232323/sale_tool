@@ -124,11 +124,11 @@ class Servicesitem extends Admin_Controller {
         $discount_max = $this->input->post('discount_max');
         $price_net = $this->input->post('price_net');
         $price_percent = $this->input->post('price_percent');
-        $price_gross = $price_net * $price_percent / 100;
+        $price_gross = $price_net * (100 +  $price_percent)/ 100;
         
         $extra_net = $this->input->post('extra_net');
         $extra_percent = $this->input->post('extra_percent');
-        $extra_gross = $extra_net * $extra_percent / 100;
+        $extra_gross = $extra_net * (100 + $extra_percent ) / 100;
         
         $this->services_price->setValue('id',$id);
         $this->services_price->setValue('service_level',$level);

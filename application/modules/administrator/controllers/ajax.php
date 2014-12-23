@@ -186,15 +186,13 @@ class Ajax extends Admin_Controller {
             $services_price = $this->services_price->getPrice($_service_type, $_service_id, $_service_level_id, $_from, $_to);
 
             $morder_items->setValue('discount', min(max(0, $_discount), $services_price->discount_max));
-            $morder_items->setValue('price_gross', $services_price->price_net * $services_price->price_percent / 100);
-            $morder_items->setValue('extra_gross', $services_price->extra_net * $services_price->extra_percent / 100);
+            $morder_items->setValue('price_gross', $services_price->price_net * (100 + $services_price->price_percent)/ 100);
+            $morder_items->setValue('extra_gross', $services_price->extra_net * (100 + $services_price->extra_percent) / 100);
 
-            $total = ($services_price->price_net * $services_price->price_percent * $morder_items->getData()['price_number'] +
-                    $services_price->extra_net * $services_price->extra_percent * $morder_items->getData()['extra_number']) * (100 - $_discount) / 100 / 100;
+            $total = ($services_price->price_net * (100 + $services_price->price_percent) * $morder_items->getData()['price_number'] +
+                    $services_price->extra_net * (100 + $services_price->extra_percent) * $morder_items->getData()['extra_number']) * (100 - $_discount) / 100 / 100;
             $morder_items->setValue('total', $total);
-        }    
-        
-
+        }
         if ($morder_items->save())
             echo "Saved successfully" ;
         else
