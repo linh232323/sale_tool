@@ -26,12 +26,13 @@ class services_price extends mabstract {
         $this->db->select($this->_table.'.discount_max' . ' as discount_max' );
         
         $this->db->from($this->_table);
+
         $this->db->where($this->_table.'.service_type_id', $service_type);
         $this->db->where('service_id', $service_id);        
-        $this->db->where('date_from >=', $from_date);
-        $this->db->where('date_to <=', $to_date);
+        $this->db->where('date_from <=', $from_date);
+        $this->db->where('date_to >=', $to_date);
         $this->db->join('services_level', 'services_level.id = services_price.service_level');
-        
+        echo $this->db->get_compiled_select();
         $query = $this->db->get();        
         $data = $query->result();        
         return $data;
