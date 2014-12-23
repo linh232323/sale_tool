@@ -63,7 +63,7 @@ class services_price extends mabstract {
         $this->db->join('services_level', 'services_level.id = services_price.service_level');
         $this->db->join('services', 'services.id = services_price.service_id');
         $query = $this->db->get(); */
-
+        $to_date = date("Y-m-d");
         $strQuery = "SELECT
                            *,
                            c1.name as service_name,
@@ -83,7 +83,7 @@ class services_price extends mabstract {
                                     SELECT service_id
                                     FROM services_price as s
                                     WHERE s.service_type_id = {$type_id} AND
-                                    (s.`date_to` >= {$to_date} OR s.`date_from` >= {$from_date})
+                                    (s.`date_to` <= \"{$to_date}\")
                                 )
                          ORDER BY service_id , date_to DESC) as sub_table
                          INNER JOIN services c1 on c1.id=sub_table.service_id
@@ -92,7 +92,6 @@ class services_price extends mabstract {
                          rn <= 5
                      ORDER BY service_id , date_to DESC";
 
-        echo $strQuery;
         $query = $this->db->query($strQuery);
         $data = $query->result();        
         return $data;

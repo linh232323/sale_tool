@@ -32,7 +32,10 @@ class Servicesitem extends Admin_Controller {
         );
         $services_items = $this->services_price->getAllPriceByServiceId($id);
         $level_model = $this->services_level->getAllData();
+        $count = 0;
         foreach ($services_items as $item) {
+            if($count ==0)
+                var_dump($item);
             $d = array();
             foreach((array)$item as $k => $v){
                 switch ($k){
@@ -59,6 +62,7 @@ class Servicesitem extends Admin_Controller {
                 'value' => toSelection($level_model, $item->service_level, 'level', 'level')
             );
             $data[] =$d;
+            $count ++;
         }
         
         $serviceModel = $this->services->load($id);
