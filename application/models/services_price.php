@@ -35,7 +35,7 @@ class services_price extends mabstract {
 
         $query = $this->db->get();        
         $data = $query->result();
-          echo $this->db->last_query();
+        //  echo $this->db->last_query();
         return $data;
     }
     function getById($id){
