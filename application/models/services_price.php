@@ -39,7 +39,7 @@ class services_price extends mabstract {
     function getById($id){
         
     }    
-    function getAllByType($type_id,$from_date,$to_date){
+    function getAllByType($type_id,$from_date = null,$to_date = null){
         /*$this->db->select($this->_table.'.id' . ' as id' );
         $this->db->select('services_level.id as level_id' );
         $this->db->select('services_level.name as level_name');
@@ -83,7 +83,7 @@ class services_price extends mabstract {
                                     SELECT service_id
                                     FROM services_price as s
                                     WHERE s.service_type_id = {$type_id} AND
-                                    (s.`date_to` <= \"{$to_date}\")
+                                    (s.`date_to` >= \"{$to_date}\")
                                 )
                          ORDER BY service_id , date_to DESC) as sub_table
                          INNER JOIN services c1 on c1.id=sub_table.service_id
