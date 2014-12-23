@@ -64,21 +64,34 @@ class services_price extends mabstract {
         $this->db->join('services', 'services.id = services_price.service_id');
         $query = $this->db->get(); */
 
-        $strQuery =
+        $strQuery = "SELECT
+                           *,
+                           c1.name as service_name,
+                           c2.name as level_name
+                     FROM
+                         (SELECT
+                                 *,
+                                 @rn:=CASE
+                                     WHEN @var_service_id = service_id THEN @rn + 1
+                                     ELSE 1
+                                 END AS rn,
+                                 @var_service_id:=service_id
+                         FROM
+                             (SELECT @var_service_id:=NULL, @rn:=0) vars, services_price
+                             WHERE
+                                service_id IN (
+                                    SELECT service_id
+                                    FROM services_price as s
+                                    WHERE s.service_type_id = {$type_id} AND
+                                    (s.`date_to` >= {$to_date} OR s.`date_from` >= {$from_date})
+                                )
+                         ORDER BY service_id , date_to DESC) as sub_table
+                         INNER JOIN services c1 on c1.id=sub_table.service_id
+                         INNER JOIN services_level c2 on c2.id=sub_table.service_level
+                     WHERE
+                         rn <= 5
+                     ORDER BY service_id , date_to DESC";
 
-              "select top 5 *,
-              from " . $this->_table . "
-              where (
-                 select f.*,services.name as service_name, services_level.name as level_name
-                 from `" . $this->_table . "`  as f
-                 where
-                 f.`id` = ".$this->_table.".id and
-                 f.`service_type_id` = {$type_id} and
-                 (f.`date_from` < \"{$from_date}\" or f.`date_to` < \"{$to_date}\")
-                 inner join `services` on `services`.`service_id` = f.`service_id`
-                 inner join `services_level` on `services_level`.`id` = f.`service_level`
-              )
-        ";
         echo $strQuery;
         $query = $this->db-query($strQuery);
         $data = $query->result();        
