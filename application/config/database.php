@@ -48,10 +48,11 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'root';
+
+$db['default']['hostname'] = '103.27.62.50';
+$db['default']['username'] = 'genuinet_sale';
 $db['default']['password'] = '1234Zin.';
-$db['default']['database'] = 'sale';
+$db['default']['database'] = 'genuinet_sale';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
