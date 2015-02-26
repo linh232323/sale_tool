@@ -59,7 +59,7 @@ class Hotel extends Admin_Controller {
                 'name' => $item->name
             );
         }
-        
+        $this->app_data['service_id'] = self :: $_SERVICES_TYPE;
         $this->my_layout->view('/services/list', $this->app_data);
     }
 

@@ -7,15 +7,15 @@
             <thead>
                 <tr>
                     <th>#</th>                    
-                    <th>Name</th>
-                    <th>Quanlity</th>
-                    <th>Price</th>
-                    <th># Price</th>
-                    <th>Extra</th>
-                    <th># Extra</th>
-                    <th>Max discount</th>
-                    <th>Discount %</th>
-                    <th>Total</th>
+                    <th>Tên D.Vụ</th>
+                    <th>Chất luợng</th>
+                    <th>Đơn giá</th>
+                    <th>Số nguời</th>
+                    <th>Đ.giá Phụ thu</th>
+                    <th>Số Phụ thu</th>
+                    <th>Giảm tối đa</th>
+                    <th>Giảm giá %</th>
+                    <th>Tổng</th>
                 </tr>
 
             </thead>

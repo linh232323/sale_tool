@@ -174,7 +174,7 @@
                 updater: function (item) {
                     var data = mapped[item];
                     var target = $this;
-                    target.closest('.services-items-form').find('.services-level-id').val(data.level_id);
+                    target.closest('.services-items-form').find('.services-price-id').val(data.price_id);
                     target.closest('.services-items-form').find('.services-price').val(data.price);
                     target.closest('.services-items-form').find('.services-extra').val(data.extra);
                     target.closest('.services-items-form').find('.services-max-discount').val(data.max_discount);
@@ -245,7 +245,8 @@
                     '&from_date=' + tour_date.find('.tour-date-name').val() +
                     '&to_date=' + tour_date.find('.tour-date-name').val() +
                     '&service_id=' + tbody.find('.services-id').val() +
-                    '&service_level_id=' + tbody.find('.services-level-id').val() +
+                    '&service_price_id=' + tbody.find('.services-price-id').val() +
+                    '&service_level_name=' + tbody.find('.services-level').val() +
                     '&price_number=' + tbody.find('.services-price-number').val() +
                     '&extra_number=' + tbody.find('.services-extra-number').val() +
                     '&discount=' + tbody.find('.services-discount').val() +                    
@@ -341,7 +342,7 @@
         var append = '<input class="services-name" value="' + name + '"/>' +
                 '<input type="hidden" class="service-item-id" value="' + id + '" />' +
                 '<input id="services-level" />' +
-                '<input id="hidden" class="service-level-id" />' +
+                '<input id="hidden" class="services-price-id" />' +
                 '<span id="service-price"></span>' +
                 '<input id="services-price-number" />' +
                 '<span id="service-extra"></span>' +
@@ -374,6 +375,16 @@
 
 
     }
+    
+    function printOrder(){
+  
+            var printWindow = window.open( '/administrator/order/template/?id=<?php echo $id;?>' , 'Print', 'left=200, top=0, width=950, height=500, toolbar=0, resizable=0');
+            printWindow.addEventListener('load', function(){
+                printWindow.print();
+                printWindow.close();
+            }, true);
+        
+    }
 </script>
 <?php
 
@@ -386,7 +397,7 @@ function printButton() {
             <a class="btn btn-primary" href="#"><i class="icon-wrench icon-white"></i> Save</a>
             <a class="btn btn-warning" href="#"><i class="icon-ok icon-white"></i> Submit</a>              
             <a class="btn btn-success" href="#"><i class="icon-ok icon-white"></i> Complete</a>
-
+            <a class="btn btn-info" href="#" onclick="javascript:printOrder()"><i class="icon-circle-arrow-down icon-white"></i> Print</a>
         </div>
     </div>
 

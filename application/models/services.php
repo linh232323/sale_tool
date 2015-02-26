@@ -9,7 +9,8 @@ class services extends mabstract {
     function getAllByType($_service_type_id){
         $this->db->select('*');
         $this->db->from($this->_table);
-        $this->db->where('service_type_id',$_service_type_id);           
+        $this->db->where('service_type_id',$_service_type_id);   
+        $this->db->where('deleted',0);
         $query = $this->db->get();
         $data = $query->result();
         return $data;
@@ -20,7 +21,7 @@ class services extends mabstract {
         $this->db->where('service_type_id',$_service_type_id);   
         
         $this->db->where("(`location_id_a` = $loc_a_id OR `location_id_a` = $loc_b_id)");    
-        
+        $this->db->where('deleted',0);
         
         $query = $this->db->get();
         $data = $query->result();

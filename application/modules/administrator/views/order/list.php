@@ -12,13 +12,13 @@
     <thead>
         <tr>
             <th>#</th>
-            <th>Name</th>
-            <th>#Customer</th>
+            <th>Tên Khách hàng</th>
+            <th># Khách hàng</th>
 <!--            <th>From Date</th>
             <th>To Date</th>-->
-            <th>Amount Total</th>
-            <th>Employee</th>
-            <th>Action</th>
+            <th>Tổng hoá đơn</th>
+            <th>Nhân viên</th>
+            <th> </th>
         </tr>
     </thead>
     <tbody>

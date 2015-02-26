@@ -13,10 +13,8 @@ class Tour extends Admin_Controller {
         $services_price = array();
         $headers_price = array();
         $services = array();
-        
         $this->app_data['title'] = 'Tour';
         $this->app_data['controller'] = 'servicesitem';
-        
         $this->app_data['headers_price'] = array(
             'id' => '#',
             'name' => 'Name',
@@ -28,9 +26,9 @@ class Tour extends Admin_Controller {
             'extra_net' => 'Extra',
             'extra_percent' => 'Extra (%)',
             'extra_gross' => 'Extra (Gross)',
-            'discount_max' => 'Max discount',
+            'discount_max' => 'Max discount (%)',
         );
-        $_services_price = $this->services_price->getAllByType(self :: $_SERVICES_TYPE,'2014/10/02','2014/12/30');
+        $_services_price = $this->services_price->getAllByType(self :: $_SERVICES_TYPE,'2014-10-02','2014-12-30');
         $this->app_data['services_price'] = array();
         foreach($_services_price as $item){
             $this->app_data['services_price'][] = array(
@@ -61,7 +59,7 @@ class Tour extends Admin_Controller {
                 'name' => $item->name
             );
         }
-        
+        $this->app_data['service_id'] = self :: $_SERVICES_TYPE;
         $this->my_layout->view('/services/list', $this->app_data);
     }
 

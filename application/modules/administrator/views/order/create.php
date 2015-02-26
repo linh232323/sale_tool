@@ -12,7 +12,7 @@
     <div class="span11 offset1">
         <div id="customer-info" class="row well">            
             <div class="control-group">
-                <label for="customer-count" class="control-label">Name:</label>
+                <label for="customer-count" class="control-label">Tên Khách hàng:</label>
                 <div class="controls">
                     <div class="input-prepend">
                         <span class="add-on"><i class="icon-user"></i></span>
@@ -23,7 +23,7 @@
             </div>
 
             <div class="control-group">
-                <label for="customer-name" class="control-label">Phone:</label>
+                <label for="customer-name" class="control-label">Điện thoại:</label>
                 <div class="controls">
                     <div class="input-prepend">
                         <span class="add-on"><i class="icon-tasks"></i></span>
@@ -33,7 +33,7 @@
                 </div>
             </div>
             <div class="control-group">
-                <label for="customer-address" class="control-label">Address:</label>
+                <label for="customer-address" class="control-label">Địa chỉ:</label>
                 <div class="controls">
                     <div class="input-prepend">
                         <span class="add-on"><i class="icon-tasks"></i></span>
@@ -51,7 +51,7 @@
                 </div>
             </div>
             <div class=control-group">
-                <label for="customer-identify" class="control-label">Identify:</label>
+                <label for="customer-identify" class="control-label">CMND:</label>
                 <div class="controls">
                     <div class="input-prepend">
                         <span class="add-on"><i class="icon-tasks"></i></span>
@@ -63,19 +63,19 @@
         </div>
         <div id="tour-info" class="row well">
             <div class="control-group">
-                <label for="customer-count" class="control-label"># of Customer:</label>
+                <label for="customer-count" class="control-label">Số luợng nguời:</label>
                 <div class="controls">
                     <input type="number" name="customer-count" class="form-control span6"/>
                 </div>
             </div>
             <div class="control-group">
-                <label for="from-date" class="control-label">From Date:</label>
+                <label for="from-date" class="control-label">Từ ngày:</label>
                 <div class="controls">
                     <input type="date"  name="from-date" class="form-control span6"/>
                 </div>
             </div>
             <div class="control-group">
-                <label for="to-date" class="control-label">To Date:</label>
+                <label for="to-date" class="control-label">Đến ngày:</label>
                 <div class="controls">
                     <input type="date"  name="to-date" class="form-control"/>
                 </div>
@@ -83,7 +83,7 @@
 
         </div>
         <div class="row">
-            <button type="submit"   type="submit" class="btn btn-primary "><i class="icon-plus-sign icon-white"></i> Add New Order</button>
+            <button type="submit"   type="submit" class="btn btn-primary "><i class="icon-plus-sign icon-white"></i> Đặt Tour</button>
         </div>
     </div>
 </form>

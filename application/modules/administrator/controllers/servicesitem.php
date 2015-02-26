@@ -18,17 +18,17 @@ class Servicesitem extends Admin_Controller {
         $data = array();
         $headers = array(
             'id' => '#',
-            'level' => 'Quanlity',
+            'level_name' => 'Loai',
             
-            'date_from' => 'From Date',
-            'date_to' => 'Date To',
-            'price_net' => 'Price Net',
-            'price_percent' => 'Price %',
-            'price_gross' => 'Price Gross',
-            'extra_net' => 'Extra Net',
-            'extra_percent' => 'Extra %',
-            'extra_gross' => 'Extra Gross',
-            'discount_max' => 'Discount Max'
+            'date_from' => 'Từ',
+            'date_to' => 'Đến',
+            'price_net' => 'Giá Net',
+            'price_percent' => 'Giá %',
+            'price_gross' => 'Giá Gross',
+            'extra_net' => 'Phụ thu Net',
+            'extra_percent' => 'Phụ thu %',
+            'extra_gross' => 'Phụ thu Gross',
+            'discount_max' => 'Giảm giá'
         );
         $services_items = $this->services_price->getAllPriceByServiceId($id);
         $level_model = $this->services_level->getAllData();
@@ -43,6 +43,10 @@ class Servicesitem extends Admin_Controller {
                     case 'date_to':
                         $type = 'input-date';
                         break;
+                    case 'price_gross':
+                    case 'extra_gross':
+                        $type = 'input-readonly';
+                        break;
                     default :
                         $type = 'input';
                         break;
@@ -54,10 +58,7 @@ class Servicesitem extends Admin_Controller {
                     'value' => $v
                 );
             }
-            $d['level'] = array(
-                'type' => 'select',
-                'value' => toSelection($level_model, $item->service_level, 'level', 'level')
-            );
+
             $data[] =$d;
         }
         
@@ -110,7 +111,11 @@ class Servicesitem extends Admin_Controller {
         $this->services_price->setValue('id',null);
         
         $this->services_price->setValue('service_id',$id);
-        
+
+        $this->services_price->setValue('date_from',date('Y-m-d'));
+
+        $this->services_price->setValue('date_to',date('Y-m-d'));
+
         $this->services_price->setValue('service_type_id',$serviceModel->getData()['service_type_id']);
         $this->services_price->save();
         redirect('/index.php/administrator/servicesitem/edit?id='.$id, 'refresh');
@@ -118,33 +123,35 @@ class Servicesitem extends Admin_Controller {
     }
     function save_item(){
         $id = $this->input->post('id');
-        $level = $this->input->post('level');
+
+        $level_name = $this->input->post('level_name');
+
         $date_from = $this->input->post('date_from');
         $date_to = $this->input->post('date_to');
         $discount_max = $this->input->post('discount_max');
         $price_net = $this->input->post('price_net');
         $price_percent = $this->input->post('price_percent');
         $price_gross = $price_net * (100 +  $price_percent)/ 100;
-        
+
         $extra_net = $this->input->post('extra_net');
         $extra_percent = $this->input->post('extra_percent');
         $extra_gross = $extra_net * (100 + $extra_percent ) / 100;
-        
+
         $this->services_price->setValue('id',$id);
-        $this->services_price->setValue('service_level',$level);
+        $this->services_price->setValue('level_name',$level_name);
         $this->services_price->setValue('date_from',$date_from);
         $this->services_price->setValue('date_to',$date_to);
         $this->services_price->setValue('discount_max',$discount_max);
         $this->services_price->setValue('price_net',$price_net);
         $this->services_price->setValue('price_percent',$price_percent);
-        
+
         $this->services_price->setValue('price_gross',$price_gross);
         $this->services_price->setValue('extra_net',$extra_net);
         $this->services_price->setValue('extra_percent',$extra_percent);
         $this->services_price->setValue('extra_gross',$extra_gross);
-              
+
         $this->services_price->save();
-        
+
     }
     
     function add_service(){
@@ -159,4 +166,18 @@ class Servicesitem extends Admin_Controller {
 
     }
 
+
+    function delete_item(){
+        $item_id = $this->input->post('id');
+        
+        $this->services_price->load($item_id);
+        $this->services_price->delete();
+    }
+
+    function delete_service(){
+        $id = $this->input->post('id');
+        $this->services->load($id);
+      
+        $this->services->delete();
+    }
 }

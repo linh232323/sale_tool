@@ -73,6 +73,9 @@
                                         case 'input':
                                             echo "<input id=\"{$key}\" name=\"{$key}\" type=\"text\" class=\"span12 {$key}\" value=\"" . $row[$key]['value'] . "\" />";
                                             break;
+                                        case 'input-readonly':
+                                            echo "<input readonly=readonly id=\"{$key}\" name=\"{$key}\" type=\"text\" class=\"span12 {$key}\" value=\"" . $row[$key]['value'] . "\" />";
+                                            break;
                                         case 'input-date':
                                             echo "<input id=\"{$key}\"  name=\"{$key}\" type=\"text\" class=\"datepicker span12 {$key}\" value=\"" . $row[$key]['value'] . "\" />";
                                             break;
@@ -87,8 +90,8 @@
                             <?php endforeach; ?>
                             <td>
                                 <div class="btn-group">
-                                    <a class="btn btn-success" onClick="saveItem($(this))" ><i class="icon-white icon-edit"></i></a>
-                                    <a class="btn btn-danger"  ><i class="icon-white icon-trash"></i></a>                        
+                                    <a class="btn btn-success" onClick="saveItem($(this))" ><i class="icon-white icon-ok"></i></a>
+                                    <a class="btn btn-danger" onClick="deleteItem($(this))" ><i class="icon-white icon-trash"></i></a>
                                 </div>
                             </td>
                             <?php ?>
@@ -109,8 +112,37 @@
 </div>
 <script>
     $(document).ready(function () {
-        $('table.table').dataTable();
+        //$('table.table').dataTable();
+        
+         $('.price_net, .price_percent').change(function(){
+            var net = parseInt( $.find('.price_net').val());
+            var percent = parseInt( $.find('.price_percent').val());
+            
+            var gross = net * (100 + percent) / 100;
+            $(this).closet('tr').find('.price_gross').val(gross);
+        });
+        
+        $('.extra_net, .extra_percent').change(function(){
+            var net = parseInt( $.find('.extra_net').val());
+            var percent = parseInt( $.find('.extra_percent').val());
+            
+            var gross = net * (100 + percent) / 100;
+            $(this).closet('tr').find('.extra_gross').val(gross);
+        });
+        
     });
+    function deleteItem(obj){
+        var tr = $(obj.closest('tr'));
+       
+        $.ajax({
+            type: "POST",
+            url: "/index.php/administrator/servicesitem/delete_item", //Relative or absolute path to response.php file
+            data:   'id='                       + tr.find('.id').html(),
+            success: function (data) {
+               location.reload();
+            }
+        });
+    }  
       
     function saveItem(obj) {
         var tr = $(obj.closest('tr'));
@@ -121,17 +153,15 @@
             data:   'id='                       + tr.find('.id').html() +
                     '&date_from='               + tr.find('.date_from').val() +
                     '&date_to='                 + tr.find('.date_to').val() +
-                    "&level="                   + tr.find('.level').val() + 
+                    "&level_name="              + tr.find('.level_name').val() +
                     '&price_percent='           + tr.find('.price_percent').val() +
                     "&price_net="               + tr.find('.price_net').val() + 
                     '&extra_net='               + tr.find('.extra_net').val() +
                     '&extra_percent='           + tr.find('.extra_percent').val() +
                     '&discount_max='            + tr.find('.discount_max').val(),
             success: function (data) {
-                alert(data);
+               location.reload();
             }
         });
-       
-
     }
 </script>

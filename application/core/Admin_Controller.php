@@ -4,8 +4,10 @@ class Admin_Controller extends MY_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->my_layout->setPageTitle("SALE TOOL User Manager");
-        $this->load->library(array("email", "session", "my_auth"));
+        $this->auth = new stdClass;
+        
+        $this->my_layout->setPageTitle("SALE TOOL");
+        $this->load->library(array("email", "session","flexi_auth_lite", "flexi_auth"));
         $this->load->helper(array('my_pagination'));
 
         if ($this->app_action == 'add' || $this->app_action == 'update') {
@@ -16,26 +18,16 @@ class Admin_Controller extends MY_Controller {
         /* Authenticate */
         // If not Login
         $this->app_data['login_url'] = $this->app_base_url . $this->app_module . "/login";
-        
-        if ($this->app_controller != 'login') {
-           
-            if (!$this->my_auth->isLogin()) {
-            //   redirect($this->app_data['login_url']);
-            }
-            else {
-                $this->app_data['userInfo'] = $this->my_auth->getUserSession();
-                // Kiem tra Multiple Login
-                if ($this->my_auth->isMultipleLogin()) {
-                    $this->my_auth->userLogout();
-                    $this->session->set_flashdata('sess_user_message', 'Bạn đã đăng nhập từ nơi khác, vui lòng đăng nhập lại.');
-                   // redirect($this->app_data['login_url']);
-                }
 
-                // Is Admin, And Login Type is Backend
-                if (!($this->my_auth->isAdmin() || $this->my_auth->isMember()) || !$this->my_auth->isBackend()){
-                    $this->session->set_flashdata('sess_user_message', 'Bạn không có quyền hạn truy cập vào khu vực này.');
-                    redirect($this->app_data['login_url']);
-                }
+        if ($this->app_controller != 'login') {
+            $this->load->library('flexi_auth');
+            // Check user is logged in as an admin.
+            // For security, admin users should always sign in via Password rather than 'Remember me'.
+            if (!$this->flexi_auth->is_logged_in_via_password() || !$this->flexi_auth->is_admin()) {
+                // Set a custom error message.
+                $this->flexi_auth->set_error_message('You must login as an admin to access this area.', TRUE);
+                $this->session->set_flashdata('message', $this->flexi_auth->get_messages());
+                redirect($this->app_data['login_url']);
             }
         }
         /* End Authenticate */

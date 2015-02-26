@@ -24,12 +24,12 @@ class orders extends mabstract {
         $this->db->select($this->_table.'.id' . ' as id' );
         $this->db->select($this->_table.'.total' . ' as total' );
         $this->db->select($this->_table.'.customer_count' . ' as customer_count' );
-        $this->db->select('users.username' . ' as employee_name' );
+        $this->db->select('user_accounts.uacc_username' . ' as employee_name' );
         $this->db->select('customer.name' . ' as customer_name' );
        
         $this->db->from($this->_table);        
         
-        $this->db->join('users ', $this->_table.'.created_by = users.id');
+        $this->db->join('user_accounts ', $this->_table.'.created_by = user_accounts.uacc_id');
         $this->db->join('customer ', $this->_table.'.customer_id = customer.id');
         
         $query = $this->db->get();

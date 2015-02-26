@@ -20,7 +20,7 @@
             </td>
             <td style="<?php if (isset($services_item['is_custom'])&& $services_item['is_custom'] == 1) echo 'display:none;';?>">
                 <input type="text" class="services-level span12" type="text" value="<?php if (isset($services_item['level_name'])) echo $services_item['level_name']; ?>"/>
-                <input type="hidden" class="services-level-id" value="<?php if (isset($services_item['level_id'])) echo $services_item['level_id']; ?>" />
+                <input type="hidden" class="services-price-id" value="<?php if (isset($services_item['service-price-id'])) echo $services_item['service-price-id']; ?>" />
             </td>
             <td style="<?php if (isset($services_item['is_custom'])&& $services_item['is_custom'] == 1) echo 'display:none;';?>">
                 <input readonly type="text"  class="services-price span12" value="<?php if (isset($services_item['price_gross'])) echo $services_item['price_gross']; ?>"/>

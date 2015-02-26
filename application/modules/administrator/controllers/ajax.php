@@ -140,10 +140,9 @@ class Ajax extends Admin_Controller {
         foreach ($_services_prices as $item) {
             $result[] = array(
                 'id' => $item->id,
-                'level_id' => $item->level_id,
                 'name' => $item->level_name,
-                'price' => $item->price,
-                'extra' => $item->extra,
+                'price' => $item->price_gross,
+                'extra' => $item->extra_gross,
                 'max_discount' => $item->discount_max
             );
         };
@@ -157,7 +156,8 @@ class Ajax extends Admin_Controller {
         
         $key = array(
             'service_id',
-            'service_level_id',
+            'service_price_id',
+            'service_level_name',
             'price_number',
             'extra_number',
             'discount',
@@ -178,12 +178,12 @@ class Ajax extends Admin_Controller {
         else{
             $_service_type = $this->input->post('service_type_id', TRUE);
             $_service_id = $this->input->post('service_id', TRUE);
-            $_service_level_id = $this->input->post('service_level_id', TRUE);
+            $_service_price_id = $this->input->post('service_price_id', TRUE);
             $_discount = $this->input->post('discount', TRUE);
             $_from = $this->input->post('from_date', TRUE);
             $_to = $this->input->post('to_date', TRUE);
 
-            $services_price = $this->services_price->getPrice($_service_type, $_service_id, $_service_level_id, $_from, $_to);
+            $services_price = $this->services_price->load($_service_price_id);
 
             $morder_items->setValue('discount', min(max(0, $_discount), $services_price->discount_max));
             $morder_items->setValue('price_gross', $services_price->price_net * (100 + $services_price->price_percent)/ 100);
@@ -196,7 +196,7 @@ class Ajax extends Admin_Controller {
         if ($morder_items->save())
             echo "Saved successfully" ;
         else
-            echo "Savde fail";
+            echo "Saved fail";
     }
 
 }

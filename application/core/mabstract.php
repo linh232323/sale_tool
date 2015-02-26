@@ -7,11 +7,21 @@ class mabstract extends MY_Model {
     function __construct() {
         parent::__construct();
     }
+    function delete(){
+        if(!empty($this->_data)){     
+            $this->setValue('deleted',true);
+            $this->save();
+        }
+        else{
+           
+        }
+    }
     function load($id){
          $this->db->select('*');
         $this->db->from($this->_table);
         $this->db->where('id', $id);
-
+        $this->db->where('deleted',0);
+        
         $query = $this->db->get();
         if ($query && $row = $query->row()){            
             $this->setData((array)$row);
@@ -26,6 +36,7 @@ class mabstract extends MY_Model {
     function getAllData($off = '', $limit = '') {
         $this->db->select('*');
         $this->db->from($this->_table);
+        $this->db->where('deleted',0);
         if ($limit != '' && $off != '') {
             $this->db->limit($off, $limit);
         }        
@@ -64,23 +75,7 @@ class mabstract extends MY_Model {
         }
     }
 
-    /**
-     * Xóa user 
-     * @param Int $userid
-     */
-    function delete($id = '') {
-        if ($loc_id != '') {
-            $this->db->where_in('id', $id);
-            if ($this->db->delete($this->_table)) {
-                return TRUE;
-            } else {
-                return FALSE;
-            }
-        } else {
-            return FALSE;
-        }
-    }
-
+    
     /**
      * Cập nhật thông tin user
      * @param Array $data

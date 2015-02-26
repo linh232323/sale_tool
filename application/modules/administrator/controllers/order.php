@@ -18,7 +18,7 @@ class Order extends Admin_Controller {
 
     function place() {
         $this->my_layout->setLibJs(array('underscore/underscore-min'));
-        $this->my_layout->setPageTitle('Place Order');
+        $this->my_layout->setPageTitle('Đặt tour');
 
         $all_services_type = $this->services_type->getAllData();                                
         
@@ -40,15 +40,15 @@ class Order extends Admin_Controller {
                     $_service_items = array();
                     $_services_items = $this->order_items->getOrderItemsByCruises($service_type->id,$cruise->id);
                     foreach($_services_items as $item){
-                        $service_level = $this->services_level->load($item->service_level_id);
+                        //$service_level = $this->services_level->load($item->service_level_id);
                         $service = $this->services->load($item->service_id);
                         $_service_items[] = array(
                                 'id' => $item->id,
                                 'services_item' => array(
                                     'service_id' => $item->service_id,
                                     'service_name' => $service ? $service->getData()['name'] : '',
-                                    'level_id' => $item->service_level_id,
-                                    'level_name' => $service_level ? $service_level->getData()['name'] : '',
+                                    'service_price_id' => $item->service_price_id,
+                                    'level_name' => $item->service_level_name,
                                     'price_gross' => $item->price_gross,
                                     'is_custom' => $item->is_custom,
                                     'extra_gross' => $item->extra_gross,
@@ -143,7 +143,7 @@ class Order extends Admin_Controller {
             $order_model =  $this->orders;
             $order_model->setData(array(
                 'customer_id' => $customer_id,
-                'created_by' => 1,
+                'created_by' => $this->flexi_auth->get_user_id(),
                 'created_date' => date ('Y/m/d'),
                 'order_status' => 0,
                 'customer_count' => $number
@@ -188,5 +188,97 @@ class Order extends Admin_Controller {
        
         $this->my_layout->view('/order/list', $this->app_data);
     }
+    public function template(){
+        //$this->my_layout = null;
+        
+        $this->app_data['order_item_date'] = array(
+            array(
+                "date" => date('Y-m-d'),
+                "cruise" => array(
+                    array(
+                        "from" => "",
+                        "to" => "",
+                        "cruise-data" => array(
+                            "restaurent" => array(
+                                array(
+                                    'description' => 'Breakfast',
+                                    'name' => 'Sheraton'
+                                    )
+                            ),
+                            "transportation" => array(),
+                            "hotel" => array(),
+                            "description" => "",
+                            "insurance" => array(),
+                            "tour" => array()
+                        )
+                    ),
+                    array(
+                        "from" => "",
+                        "to" => "",
+                        "cruise-data" => array(
+                            "restaurent" => array(
+                                array(
+                                    'description' => 'Breakfast',
+                                    'name' => 'Sheraton'
+                                    )
+                            ),
+                            "transportation" => array(),
+                            "hotel" => array(),
+                            "description" => "",
+                            "insurance" => array(),
+                            "tour" => array()
+                        )
+                    )
+                )
+            ),
+            array(
+                "date" => date('Y-m-d'),
+                "cruise" => array(
+                    array(
+                        "from" => "",
+                        "to" => "",
+                        "description" => "",
+                        "cruise-data" => array(
+                            "restaurent" => array(
+                                array(
+                                    'description' => 'Breakfast',
+                                    'name' => 'Sheraton'
+                                    )
+                            ),
+                            "transportation" => array(),
+                            "insurance" => array(),
+                            "hotel" => array(),
+                            "description" => "",
+                            "tour" => array()
 
+                        )
+                    ),
+                    array(
+                        "from" => "",
+                        "to" => "",
+                        "cruise-data" => array(
+                            "restaurent" => array(
+                                array(
+                                    'description' => 'Breakfast',
+                                    'name' => 'Sheraton'
+                                    )
+                            ),
+                            "transportation" => array(),
+                            "hotel" => array(),
+                            "description" => "",
+                            "insurance" => array(),
+                            "tour" => array()
+                        )
+                    )
+                )
+            ),
+        ); 
+        $this->app_data['customer_name'] = 'Linh Hồ';
+        $this->app_data['order_customer_number'] = 4;
+        $this->app_data['order_from_date'] = date('Y-m-d');
+        $this->app_data['order_to_date'] = date('Y-m-d');
+        
+        $this->my_layout->setLayout("layout/backend_blank", $this->app_data);
+        $this->my_layout->view('/order/template', $this->app_data);
+    }
 }
