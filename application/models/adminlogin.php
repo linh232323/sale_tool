@@ -4,7 +4,7 @@ class muserlogin extends MY_Model {
 
     function __construct() {
         parent::__construct();
-        $this->_table = 'w_customer_login';
+        $this->_table = 'userlogin';
     }
 
     //--- Lấy tất cả dữ liệu

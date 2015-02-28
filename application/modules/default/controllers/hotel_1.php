@@ -58,15 +58,31 @@ class Hotel extends Default_Controller {
 
         $_services = $this->services->getAllByType(self :: $_SERVICES_TYPE);
         $this->app_data['services'] = array();
-        foreach ($_services as $item) {
-            $this->app_data['services'][] = array(
-                'id' => $item->id,
-                'name' => $item->name,
-                'description' => $item->description
-            );
+        foreach ($_services as $key => $item) {
+            
         }
-
+        $total_books = $key;
+        $perpage = 5;
+        $this->load->library('pagination');
+        $config['total_rows'] = $total_books;
+        $config['per_page'] = $perpage;
+        $config['next_link'] = 'Next »';
+        $config['prev_link'] = '« Prev';
+        $config['num_tag_open'] = '';
+        $config['num_tag_close'] = '';
+        $config['num_links'] = 5;
+        $config['cur_tag_open'] = '';
+        $config['cur_tag_close'] = '';
+        echo $config['base_url'] = base_url() . 'default/hotel/index';
+        $config['uri_segment'] = 4;
+        $this->pagination->initialize($config);
+        echo $this->pagination->create_links();
+        $pagination = $this->pagination->create_links();
+        $offset = ($this->uri->segment(4) == '') ? 0 : $this->uri->segment(4);
+        $this->app_data['bookList'] = $this->services->getLimitByType(self :: $_SERVICES_TYPE, $perpage, $offset);
+        $this->app_data['pagination'] = $pagination;
         $this->my_layout->setPageTitle('User Home');
+        print_r($pagination);
         $this->my_layout->view('/user/hotel', $this->app_data);
     }
 

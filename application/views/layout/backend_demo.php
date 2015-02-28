@@ -70,7 +70,6 @@
                             Logged in as <a href="#" class="navbar-link">Username</a>
                         </p>
                         <ul class="nav">
-                            <?php echo base_url();?>
                             <?php
                             foreach ($menu as $m) {
                                 if ($m['parent_id'] == 0) {
@@ -83,7 +82,7 @@
 
                                     if (($m['link'] == $this->uri->segment(2)) && ($m['link'] != "index")) {
                                         echo "<li class='active'>";
-                                        echo "<a href =".$app_base_url."default/".$m['link'].">$m[title]</a>";
+                                        echo "<a href =" . $app_base_url . "default/" . $m['link'] . ">$m[title]</a>";
                                         echo '</li>';
                                     } else {
                                         if (isset($s_menu) && $sm['parent_id'] == $m['id']) {
@@ -96,14 +95,14 @@
                                                 if ($s_m['parent_id'] == $m['id']) {
 
                                                     echo "<li>";
-                                                    echo "<a href =".$app_base_url."default/".$m['link'].">$m[title]</a>";
+                                                    echo "<a href =" . $app_base_url . "default/" . $s_m['link'] . ">$s_m[title]</a>";
                                                     echo "</li>";
                                                 }
                                             }
                                             echo '</ul>';
                                         } else {
                                             echo "<li>";
-                                            echo "<a href =".$app_base_url."default/".$m['link'].">$m[title]</a>";
+                                            echo "<a href =" . $app_base_url . "default/" . $m['link'] . ">$m[title]</a>";
                                             echo '</li>';
                                         }
                                     }
@@ -130,26 +129,41 @@
                             <?php
                             foreach ($menu as $m) {
                                 if ($m['parent_id'] == 0) {
-                                    if (($m['link'] == $this->uri->segment(1)) && ($m['link'] != "index")) {
-                                        echo "<li id='active'>";
-                                    } else {
-                                        echo "<li class='nav-header'>";
-                                    }
-                                    echo "<a href ='$m[link]'>$m[title]</a>";
-                                    echo "<ul>";
+
                                     foreach ($menu as $sm) {
                                         if ($sm['parent_id'] == $m['id']) {
-
-                                            echo "<li>";
-                                            echo "<a href ='$sm[link]'>$sm[title]</a>";
-                                            echo "</li>";
+                                            $s_menu = "<li class='active'>";
                                         }
                                     }
-                                    echo "</ul>";
-                                    echo '</li>';
+
+                                    if (($m['link'] == $this->uri->segment(2)) && ($m['link'] != "index")) {
+                                        echo "<li class='active'>";
+                                        echo "<a href =" . $app_base_url . "default/" . $m['link'] . ">$m[title]</a>";
+                                        echo '</li>';
+                                    } else {
+                                        if (isset($s_menu) && $sm['parent_id'] == $m['id']) {
+                                            echo '<li class = "nav-header">';
+                                            echo "$m[title]";
+
+                                            echo '<ul>';
+                                            foreach ($menu as $s_m) {
+                                                if ($s_m['parent_id'] == $m['id']) {
+
+                                                    echo "<li>";
+                                                    echo "<a href =" . $app_base_url . "default/" . $s_m['link'] . ">$s_m[title]</a>";
+                                                    echo "</li>";
+                                                }
+                                            }
+                                            echo '</ul>';
+                                        } else {
+                                            echo "<li>";
+                                            echo "<a href =" . $app_base_url . "default/" . $m['link'] . ">$m[title]</a>";
+                                            echo '</li>';
+                                        }
+                                    }
                                 }
                             }
-                            ?> 
+                            ?>
                     </div>
                 </div>
                 <div class="span10">
