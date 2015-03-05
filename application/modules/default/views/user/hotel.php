@@ -29,7 +29,4 @@
 </tbody>
 </table>
 <script>
-    $(document).ready(function () {
-        $('table.table').dataTable();
-    });
 </script>

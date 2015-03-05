@@ -28,7 +28,7 @@ class MY_Pagination extends CI_Pagination {
      * @param type $params
      */
     function initialize(&$params = array()) {
-        $this->configPaging($params);
+        #$this->configPaging($params);
         parent::initialize($params);
     }
 

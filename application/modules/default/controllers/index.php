@@ -1,19 +1,11 @@
 <?php
 
-<<<<<<< HEAD
 /* 
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 
-class Index extends MY_Controller {
-    public function index(){
-        echo "a";
-        redirect('/administrator/order/listing');
-    }
-}
-=======
 class Index extends Default_Controller {
 
     private $_default_module = "default/";
@@ -30,4 +22,3 @@ class Index extends Default_Controller {
     }
 
 }
->>>>>>> 961a6a567bec5be5f1028aa32ae8d4b0b3f2d9e8
