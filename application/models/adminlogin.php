@@ -1,11 +1,8 @@
-
 <?php
 
-if (!defined('BASEPATH'))
-    exit('No direct script access allowed');
-
 class muserlogin extends MY_Model {
-function __construct() {
+
+    function __construct() {
         parent::__construct();
         $this->_table = 'userlogin';
     }
@@ -247,7 +244,6 @@ function __construct() {
             return $query->row();
         }
     }
-
 
 }
 

@@ -1,4 +1,4 @@
-<table id="table_2" class="table table-striped table-bordered dataTable no-footer">
+<table id="table_2" class="table table-striped table-hover table-condensed dataTable no-footer">
     <thead>
         <tr>
 
@@ -10,7 +10,7 @@
     <tbody>
         <?php foreach ($services as $service): ?>            
             <tr>                
-                <td >
+                <td class="img-polaroid">
                     ImgImgImgImgImgImgImgImg
                 </td>
                 <td>
@@ -20,8 +20,8 @@
         <div>
             <?php echo $service['description']; ?>
         </div>
-        <div class="btn-group">
-            <a class="btn btn-success"  href="<?php echo $app_base_url."default/".$controller."/index/".$service['id'];?>"><i class="icon-white icon-edit"></i></a>
+        <div class="btn-group pull-right">
+            <a class="btn btn-large btn-primary" href="<?php echo $app_base_url."default/".$controller."/index/".$service['id'];?>"><i class="icon-check icon-white"></i>  Book </a>
         </div>
     </td>
     </tr>
