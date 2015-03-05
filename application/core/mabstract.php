@@ -16,6 +16,7 @@ class mabstract extends MY_Model {
            
         }
     }
+    
     function load($id){
          $this->db->select('*');
         $this->db->from($this->_table);

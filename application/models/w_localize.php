@@ -4,11 +4,7 @@ class w_localize extends mabstract{
 
 	private static $_cacheText;
 
-	public function __constructor(){
-		$this->load->library('session');
-
-		
-	}
+	
 
 	public function getText($text , $field , $store = null){
 		if($store == null){

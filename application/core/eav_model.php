@@ -17,8 +17,34 @@ class eav_model extends mabstract{
 
 	public function save(){
 
-		
-		
+		parent::save();
+
+		$this->saveAttributes();
+	}
+
+	public function saveAttributes($entity_id = null,$store_code = null){
+		if($entity_id == null){
+			$entity_id = $this->getData('id');
+		}
+
+		if($store_code == null){
+			$w_store = new w_store();
+			$store_code = $w_store->getCurrentStore();
+		}
+
+        $eav_table = $this->getEAVTable());
+
+		foreach(self :: $_attributes as $attribute_code){
+			$value = $this->getData($attribute_code);
+
+			$sql = 	"SELECT IF( EXISTS(SELECT * FROM {$eav_table} WHERE `store_code` =  {$store_code} AND entity_id = {$entity_id} AND attribute_code = {$attribute}), 
+        				INSERT INTO {$eav_table} (entity_id,store_code,attribute_code,value) VALUES({$entity_id},{$store_code},{$attribute_code},{$value}),
+        				UPDATE {$eav_table} SET value={$value} WHERE store_code='{$store_code}' AND entity_id={$entity_id} AND attribute_code={$key})";
+
+			$this->db->query($sql);
+
+	        $query = $this->db->get();
+		}
 	}
 
 	public function load($id){
