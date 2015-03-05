@@ -48,6 +48,7 @@
 $active_group = 'default';
 $active_record = TRUE;
 
+
 $db['default']['hostname'] = '103.27.62.50';
 $db['default']['username'] = 'genuinet_sale';
 $db['default']['password'] = '1234Zin.';
