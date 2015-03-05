@@ -14,6 +14,15 @@ class Hotel extends Default_Controller {
     }
 
     public function index() {
+        $this->load->library('pagination');
+
+        $config['base_url'] = 'http://example.com/index.php/test/page/';
+        $config['total_rows'] = 200;
+        $config['per_page'] = 20;
+
+        $this->pagination->initialize($config);
+
+        echo $this->pagination->create_links();
         $services_price = array();
         $headers_price = array();
         $services = array();
