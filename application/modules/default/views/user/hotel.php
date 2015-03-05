@@ -8,25 +8,27 @@
         </tr>
     </thead>
     <tbody>
-        <?php foreach ($services as $service): ?>            
+        <?php foreach ($bookList as $value): ?>            
             <tr>                
                 <td class="img-polaroid">
                     ImgImgImgImgImgImgImgImg
                 </td>
                 <td>
         <legend>
-            <?php echo $service['name']; ?>
+            <?php echo $value->name; ?>
         </legend>
         <div>
-            <?php echo $service['description']; ?>
+            <?php echo $value->description; ?>
         </div>
         <div class="btn-group pull-right">
-            <a class="btn btn-large btn-primary" href="<?php echo $app_base_url."default/".$controller."/index/".$service['id'];?>"><i class="icon-check icon-white"></i>  Book </a>
+            <a class="btn btn-large btn-primary" href="<?php echo $app_base_url . "default/" . $controller . "/index/" . $value->id; ?>"><i class="icon-check icon-white"></i>  Book </a>
         </div>
-    </td>
+
+    </td>  
     </tr>
 <?php endforeach; ?>
 </tbody>
 </table>
-<script>
-</script>
+<div class="pull-right">
+    <?php echo $pagination; ?>
+</div>

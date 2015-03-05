@@ -15,6 +15,16 @@ class services extends mabstract {
         $data = $query->result();
         return $data;
     }
+    function getLimitByType($_service_type_id,$perpage, $offset){
+        $this->db->select('*');
+        $this->db->from($this->_table);
+        $this->db->limit($perpage, $offset);
+        $this->db->where('service_type_id',$_service_type_id);   
+        $this->db->where('deleted',0);
+        $query = $this->db->get();
+        $data = $query->result();
+        return $data;
+    }
     function getServicesByLocation($_service_type_id,$loc_a_id = null,$loc_b_id = null){
         $this->db->select('*');
         $this->db->from($this->_table);

@@ -13,7 +13,7 @@ class MY_Pagination extends CI_Pagination {
         parent::__construct();        
         $CI = & get_instance();
         
-        $CI->config->set_item('enable_query_strings', TRUE);
+        $CI->config->set_item('enable_query_strings', FALSE);
         
         $this->_per_page = config_item("per_page");
         $this->_num_link = config_item("num_link");
