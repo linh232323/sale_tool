@@ -4,26 +4,35 @@ class w_localize extends mabstract{
 
 	private static $_cacheText;
 
+	public function __constructor(){
+		parent::__constructor();
+
+	}
+
 	
 
 	public function getText($text , $field , $store = null){
 		if($store == null){
 
+			$CI =& get_instance();
+	        $CI->load->model('w_store');
+	        $store = $CI->w_store->getCurrentStore();
 		}
-		if(!is_array(self :: $_cacheText))
+
+		if(!is_array(self :: $_cacheText) || !isset(self :: $_cacheText))
 		{
 			self :: $_cacheText = array();
 		}
 
-		if(!is_array(self :: $_cacheText[$store])){
+		if(!isset(self :: $_cacheText[$store]) || !is_array(self :: $_cacheText[$store])){
 			self :: $_cacheText[$store] = array();
 		}
 
-		if(!is_array(self :: $_cacheText[$store][$field])){
+		if(!isset(self :: $_cacheText[$store][$field]) || !is_array(self :: $_cacheText[$store][$field]) ){
 			self :: $_cacheText[$store][$field] = array();
 		}
 
-		if(!empty(self :: $_cacheText[$store][$field][$text])){
+		if(empty(self :: $_cacheText[$store][$field][$text])){
 			self :: $_cacheText[$store][$field][$text] = $this->load($text , $field , $store);
 
 			if(self :: $_cacheText[$store][$field][$text] === false){

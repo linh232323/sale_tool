@@ -3,9 +3,15 @@
 class mabstract extends MY_Model {
     public $_data;
     
-    
+    protected $_page_size;
+    protected $_offset;
+
     function __construct() {
         parent::__construct();
+    }
+
+    public  function getTable(){
+        return $this->_table;
     }
     function delete(){
         if(!empty($this->_data)){     
@@ -16,10 +22,20 @@ class mabstract extends MY_Model {
            
         }
     }
+
+    function counts($attributes){
+        $this->db->from($this->getTable());
+
+        foreach($attributes as $key => $value){
+            $this->db->where($key, $value);
+        }
+
+        return $this->db->count_all_results();
+    }
     
     function load($id){
          $this->db->select('*');
-        $this->db->from($this->_table);
+        $this->db->from($this->getTable());
         $this->db->where('id', $id);
         $this->db->where('deleted',0);
         
@@ -33,13 +49,31 @@ class mabstract extends MY_Model {
         }
         
     }
+
+    public function setPageSize($page_size)
+    {
+        $this->_page_size = $page_size;
+        return $this;
+    }
+
+    public function setOffset($offset)
+    {
+        $this->_offset = $offset;
+        return $this;
+    }
+
+
+
     //--- Lấy tất cả dữ liệu
-    function getAllData($off = '', $limit = '') {
+    function getAllData($offset = null, $page_size = null) {
+        $this->_offset = $offset;
+        $this->_page_size = $page_size;
+
         $this->db->select('*');
-        $this->db->from($this->_table);
+        $this->db->from($this->getTable());
         $this->db->where('deleted',0);
-        if ($limit != '' && $off != '') {
-            $this->db->limit($off, $limit);
+        if (isset($this->_offset) && isset($this->_page_size)) {
+            $this->db->limit($this->_offset, $this->_page_size);
         }        
         $query = $this->db->get();
         $data = $query->result();
@@ -53,7 +87,7 @@ class mabstract extends MY_Model {
      * @return Int
      */
     function totalRows() {
-        return $this->db->count_all($this->_table);
+        return $this->db->count_all($this->getTable());
     }
 
     /**
@@ -86,7 +120,7 @@ class mabstract extends MY_Model {
     function update($data = array(), $id = '') {
         if (!empty($data) && $id != '' && is_numeric($id)) {
             $this->db->where('id', $id);
-            if ($this->db->update($this->_table, $data))
+            if ($this->db->update($this->getTable(), $data))
                 return $id;
             else
                 return FALSE;
@@ -103,15 +137,27 @@ class mabstract extends MY_Model {
             return $this->add($this->_data);
     }
     
-    public function setData($data){
-        if(isset($this->_data ))
+    public function setData($key, $value = null){
+        if(!isset($this->_data )){
+
             $this->_data = array();
+        }
         
-        $this->_data = $data;
+        if(!isset($value))
+            $this->_data = $key;
+        else
+            $this->_data[$key] = $value;
+
     }
     
-    public function getData(){
-        return $this->_data;
+    public function getData($key = null){
+        if($key == null)
+            return $this->_data;
+        
+        if(isset($this->_data[$key]))
+            return $this->_data[$key];
+        else
+            return null;
     }
     
     public function setValue($key, $value){

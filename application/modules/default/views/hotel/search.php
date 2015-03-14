@@ -2,26 +2,25 @@
     <thead>
         <tr>
 
-            <th> </th>        <th>Hotel</th>                     
-
+            
 
         </tr>
     </thead>
     <tbody>
-        <?php foreach ($bookList as $value): ?>            
+        <?php foreach ($hotels as $hotel): ?>            
             <tr>                
                 <td class="img-polaroid">
-                    ImgImgImgImgImgImgImgImg
+                    <img src="<?php echo $hotel->getData('thumbnail_url');?>" alt="<?php echo $hotel->getData('name')?>"/>
                 </td>
                 <td>
         <legend>
-            <?php echo $value->name; ?>
+            <?php echo $hotel->getData('name'); ?>
         </legend>
         <div>
-            <?php echo $value->description; ?>
+            <?php echo $hotel->getData('description') ; ?>
         </div>
         <div class="btn-group pull-right">
-            <a class="btn btn-large btn-primary" href="<?php echo $app_base_url . "default/" . $controller . "/index/" . $value->id; ?>"><i class="icon-check icon-white"></i>  Book </a>
+            <a class="btn btn-large btn-primary" href="<?php echo $app_base_url . "default/hotel/detail/" . $hotel->getData('id'); ?>"><i class="icon-check icon-white"></i>  Book </a>
         </div>
 
     </td>  

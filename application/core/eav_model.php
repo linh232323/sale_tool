@@ -1,18 +1,26 @@
 <?php
 class eav_model extends mabstract{
+	protected $_attributes;
 
-	protected $_attributes = array(
-
-	);
-	public function getEAVTable(){
-		return 'w_eav_' . strtolower(get_class($this));
+	public function __construct(){
+		$this->_attributes = array();
+		$this->setAttributeCodes();
+		parent::__construct();
 	}
 
-	public function saveAttributes($entity_id, $store_code = null){
-		if($store_code == null){
-			$w_store = new w_store();
-			$store_code = $w_store->getCurrentStore();
-		}
+	
+
+	public  function setAttributeCodes(){
+	}
+
+	public function getTable(){
+		$this->_table = strtolower(get_class($this));
+		return $this->_table;
+	}
+
+	public function getEAVTable(){
+		
+		return 'w_eav_' . strtolower(get_class($this));
 	}
 
 	public function save(){
@@ -28,11 +36,13 @@ class eav_model extends mabstract{
 		}
 
 		if($store_code == null){
-			$w_store = new w_store();
-			$store_code = $w_store->getCurrentStore();
+			$CI =& get_instance();
+	        $CI->load->model('w_store');
+	        $store_code = $CI->w_store->getCurrentStore();
+
 		}
 
-        $eav_table = $this->getEAVTable());
+        $eav_table = $this->getEAVTable();
 
 		foreach(self :: $_attributes as $attribute_code){
 			$value = $this->getData($attribute_code);
@@ -41,9 +51,7 @@ class eav_model extends mabstract{
         				INSERT INTO {$eav_table} (entity_id,store_code,attribute_code,value) VALUES({$entity_id},{$store_code},{$attribute_code},{$value}),
         				UPDATE {$eav_table} SET value={$value} WHERE store_code='{$store_code}' AND entity_id={$entity_id} AND attribute_code={$key})";
 
-			$this->db->query($sql);
-
-	        $query = $this->db->get();
+			$query = $this->db->query($sql);
 		}
 	}
 
@@ -55,6 +63,7 @@ class eav_model extends mabstract{
 		$this->loadAttributes();
 
 		$this->afterLoad();
+
 	}
 
 	public function beforeLoad(){
@@ -71,26 +80,30 @@ class eav_model extends mabstract{
 		}
 
 		if($store_code == null){
-			$w_store = new w_store();
-			$store_code = $w_store->getCurrentStore();
+			$CI =& get_instance();
+	        $CI->load->model('w_store');
+	        $store_code = $CI->w_store->getCurrentStore();
 		}
 
-        $eav_table = $this->getEAVTable());
+        $eav_table = $this->getEAVTable();
 
-        $sql = "SELECT * FROM {$eav_table} 
-        		WHERE 	entity_id = {$entity_id} 
+        $sql = " 
+        		SELECT * FROM `" . $eav_table ."`
+        		WHERE 	entity_id = " . $entity_id . " 
         			AND store_code = '{$store_code}'
-        			AND attribute_code IN ('".implode(",", $this->_attributes)."')";
+        			AND attribute_code IN ('".implode("','", $this->_attributes)."')";
 
-		$this->db->query($sql);
-
-        $query = $this->db->get();
+		$query = $this->db->query($sql);
 
         $data = (array)$query->result();
 
         foreach($data as $row){
-        	$this->setData($row['attribute_code'] , $row['value'])
+        	
+        	$this->setData($row->attribute_code , $row->value);
+
         }
+
+
 	}	
 }
 ?>

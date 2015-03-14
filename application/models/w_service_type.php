@@ -13,6 +13,14 @@ class w_service_type{
 			"tour" => array(
 				"title" 	=> "Tour",
 				"id" 		=> 3
+			),
+			"transport" => array(
+				"title" 	=> "Transport",
+				"id" 		=> 4
+			),
+			"insurance" => array(
+				"title" 	=> "insurance",
+				"id" 		=> 5
 			)
 		);
 	}

@@ -5,12 +5,20 @@
     Description:
         Purpose of the stylesheet follows.
 */
-
+@font-face {
+  font-family: 'GothamBook';
+  src: url('../fonts/Gotham-Book.ttf');
+  src: url('../fonts/Gotham-Book.woff') format('woff'),
+        url('../fonts/Gotham-Book.ttf') format('truetype');
+        
+  font-weight: normal;
+  font-style: normal;
+}
 root { 
     display: block;
 }
 body {
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: "GothamBook",Arial,sans-serif !important;
     font-size: 13px;
     line-height: 18px;
     color: #333;

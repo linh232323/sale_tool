@@ -1,6 +1,9 @@
+#RewriteEngine on
+
+#RewriteCond %{REQUEST_FILENAME} !index.php
+#RewriteRule .* index.php?url=$0 [QSA,L]
+
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ index.php?/$1 [L]
-
-Redirect /index.html /administrator/index/index
+RewriteRule ^(.*)$ index.php/$1 [L]

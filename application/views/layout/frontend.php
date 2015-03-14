@@ -70,45 +70,46 @@
                             Logged in as <a href="#" class="navbar-link">Username</a>
                         </p>
                         <ul class="nav">
-                            //<?php
-//                            foreach ($menu as $m) {
-//                                if ($m['parent_id'] == 0) {
-//
-//                                    foreach ($menu as $sm) {
-//                                        if ($sm['parent_id'] == $m['id']) {
-//                                            $s_menu = "<li class='active'>";
-//                                        }
-//                                    }
-//
-//                                    if (($m['link'] == $this->uri->segment(2)) && ($m['link'] != "index")) {
-//                                        echo "<li class='active'>";
-//                                        echo "<a href =" . $app_base_url . "default/" . $m['link'] . ">$m[title]</a>";
-//                                        echo '</li>';
-//                                    } else {
-//                                        if (isset($s_menu) && $sm['parent_id'] == $m['id']) {
-//                                            echo '<li class = "dropdown">';
-//                                            echo '<a href = "#" class = "dropdown-toggle" data-toggle = "dropdown">';
-//                                            echo "$m[title]";
-//                                            echo '<b class = "caret"></b></a>';
-//                                            echo '<ul class = "dropdown-menu">';
-//                                            foreach ($menu as $s_m) {
-//                                                if ($s_m['parent_id'] == $m['id']) {
-//
-//                                                    echo "<li>";
-//                                                    echo "<a href =" . $app_base_url . "default/" . $s_m['link'] . ">$s_m[title]</a>";
-//                                                    echo "</li>";
-//                                                }
-//                                            }
-//                                            echo '</ul>';
-//                                        } else {
-//                                            echo "<li>";
-//                                            echo "<a href =" . $app_base_url . "default/" . $m['link'] . ">$m[title]</a>";
-//                                            echo '</li>';
-//                                        }
-//                                    }
-//                                }
-//                            }
-//                            ?>
+                        <?php
+                           foreach ($menu as $m) {
+                            
+                               if ($m->getData('parent_id') == 0) {
+
+                                   foreach ($menu as $sm) {
+                                       if ($sm->getData('parent_id') == $m->getData('id')) {
+                                           $s_menu = "<li class='active'>";
+                                       }
+                                   }
+
+                                   if (($m->getData('link') == $this->uri->segment(2)) && ($m->getData('link') != "index")) {
+                                       echo "<li class='active'>";
+                                       echo "<a href =" . $app_base_url . "default/" . $m->getData('link') . ">".$m->getData('name')."</a>";
+                                       echo '</li>';
+                                   } else {
+                                       if (isset($s_menu) && $sm->getData('parent_id') == $m->getData('id')) {
+                                           echo '<li class = "dropdown">';
+                                           echo '<a href = "#" class = "dropdown-toggle" data-toggle = "dropdown">';
+                                           echo $m->getData('name');
+                                           echo '<b class = "caret"></b></a>';
+                                           echo '<ul class = "dropdown-menu">';
+                                           foreach ($menu as $s_m) {
+                                               if ($s_m->getData('parent_id') == $m->getData('id')) {
+
+                                                   echo "<li>";
+                                                   echo "<a href =" . $app_base_url . "default/" . $s_m->getData('link') . ">". $s_m->getData('name') . "</a>";
+                                                   echo "</li>";
+                                               }
+                                           }
+                                           echo '</ul>';
+                                       } else {
+                                           echo "<li>";
+                                           echo "<a href =" . $app_base_url . "default/" . $m->getData('link') . ">" . $m->getData('name') . "</a>";
+                                           echo '</li>';
+                                       }
+                                   }
+                               }
+                           }
+                            ?>
 
                         </ul>
 
@@ -131,33 +132,33 @@
 //                                if ($m['parent_id'] == 0) {
 //
 //                                    foreach ($menu as $sm) {
-//                                        if ($sm['parent_id'] == $m['id']) {
+//                                        if ($sm['parent_id'] == $m->getData('id')) {
 //                                            $s_menu = "<li class='active'>";
 //                                        }
 //                                    }
 //
-//                                    if (($m['link'] == $this->uri->segment(2)) && ($m['link'] != "index")) {
+//                                    if (($m->getData('link') == $this->uri->segment(2)) && ($m->getData('link') != "index")) {
 //                                        echo "<li class='active'>";
-//                                        echo "<a href =" . $app_base_url . "default/" . $m['link'] . ">$m[title]</a>";
+//                                        echo "<a href =" . $app_base_url . "default/" . $m->getData('link') . ">$m[title]</a>";
 //                                        echo '</li>';
 //                                    } else {
-//                                        if (isset($s_menu) && $sm['parent_id'] == $m['id']) {
+//                                        if (isset($s_menu) && $sm['parent_id'] == $m->getData('id')) {
 //                                            echo '<li class = "nav-header">';
 //                                            echo "$m[title]";
 //
 //                                            echo '<ul>';
 //                                            foreach ($menu as $s_m) {
-//                                                if ($s_m['parent_id'] == $m['id']) {
+//                                                if ($s_m['parent_id'] == $m->getData('id')) {
 //
 //                                                    echo "<li>";
-//                                                    echo "<a href =" . $app_base_url . "default/" . $s_m['link'] . ">$s_m[title]</a>";
+//                                                    echo "<a href =" . $app_base_url . "default/" . $s_m->getData('link') . ">$s_m[title]</a>";
 //                                                    echo "</li>";
 //                                                }
 //                                            }
 //                                            echo '</ul>';
 //                                        } else {
 //                                            echo "<li>";
-//                                            echo "<a href =" . $app_base_url . "default/" . $m['link'] . ">$m[title]</a>";
+//                                            echo "<a href =" . $app_base_url . "default/" . $m->getData('link') . ">$m[title]</a>";
 //                                            echo '</li>';
 //                                        }
 //                                    }

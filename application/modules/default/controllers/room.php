@@ -8,7 +8,6 @@ class Room extends Default_Controller {
 
     function __construct() {
         parent::__construct();
-        $this->load->model("menu");
         $this->load->model("services_type");
         $this->load->model("services_level");
         $this->load->model("services_price");
@@ -18,20 +17,7 @@ class Room extends Default_Controller {
     }
 
     public function index($idr =1) {
-        $data = $this->menu->getMenuValue();
-        foreach ($data as $key => $value) {
-            if ($value['attribute_id'] == 2) {
-                $link = $value['value'];
-                $menu[] = array('link' => $link, 'title' => $name, 'parent_id' => $parent_id, 'id' => $id);
-                //$name[1] = array('link' => $value['value']);
-            }
-            if ($value['attribute_id'] == 1) {
-                $name = $value['value'];
-                $parent_id = $value['parent_id'];
-                $id = $value['entity_id'];
-            }
-        }
-        $this->app_data['menu'] = $menu;
+       
         $data = array();
         $headers = array(
             'id' => '#',
@@ -98,7 +84,7 @@ class Room extends Default_Controller {
         $this->app_data['location_a'] = $location_a;
         $this->app_data['location_b'] = $location_b;
         $this->my_layout->setPageTitle('User Home');
-        $this->my_layout->view('/user/room', $this->app_data);
+        $this->my_layout->view('/hotel/detail', $this->app_data);
     }
 
 }

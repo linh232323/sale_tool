@@ -8,37 +8,61 @@ class Hotel extends Default_Controller {
 
     function __construct() {
         parent::__construct();
-        $this->load->model("menu");
         $this->load->model("services");
-        $this->load->model("services_price");
+        $this->load->model("w_hotel");
+        $this->load->library('pagination');
+    }
+
+    public function search(){
+        $this->app_data['title'] = 'Hotel';
+
+        $perpage = 5;      
+
+        $offset = ($this->uri->segment(4) == '') ? 0 : $this->uri->segment(4);
+       
+        $hotels =  $this
+                        ->w_hotel
+                        ->setPageSize($perpage)
+                        ->setOffset($offset)
+                        ->getItems();
+
+        $this->app_data['hotels'] = $hotels;
+
+        $config['total_rows'] = $this->w_hotel->counts(array(
+            "service_type_id" => 1,
+            "deleted" => 0
+        ));
+
+        $config['per_page']             = $perpage;
+        $config['uri_segment']          = 4;
+        $config['next_link']            = self :: $localization->getText('Next »','general');
+        $config['prev_link']            = self :: $localization->getText('« Prev','general');
+        $config['num_links']            = 2;
+        $config['use_page_numbers']     = TRUE;
+        $config['base_url']             = base_url() . 'default/hotel/search/';
+
+        $this->pagination->initialize($config);
+        $pagination = $this->pagination->create_links();
+       
+
+        $this->app_data['pagination'] = $pagination;
+        $this->my_layout->setPageTitle('Hotels');
+        $this->my_layout->view('/hotel/search', $this->app_data);
+    }
+
+    public function detail($idr = 1){
+        
+        $serviceModel = $this->services->load($idr);
+       
+        $this->app_data['id'] = $idr;
+        
+        $this->app_data['hotel'] = $serviceModel;
+        $this->my_layout->setPageTitle('Hotel');
+        $this->my_layout->view('/hotel/detail', $this->app_data);
     }
 
     public function index() {
-        $this->app_data['title'] = 'Hotel';
-        $this->app_data['controller'] = 'room';
-        $_services = $this->services->getAllByType(self :: $_SERVICES_TYPE);
-        $this->app_data['services'] = array();
-        foreach ($_services as $key => $item) {
-            
-        }
-        $total_books = $key;
-        $perpage = 5;
-        $this->load->library('pagination');
-        $config['total_rows'] = $total_books;
-        $config['per_page'] = $perpage;
-        $config['uri_segment'] = 4;
-        $config['next_link'] = 'Next »';
-        $config['prev_link'] = '« Prev';
-        $config['num_links'] = 2;
-        $config['use_page_numbers'] = TRUE;
-        $config['base_url'] = base_url() . 'default/hotel/index/';
-        $this->pagination->initialize($config);
-        $pagination = $this->pagination->create_links();
-        $offset = ($this->uri->segment(4) == '') ? 0 : $this->uri->segment(4);
-        $this->app_data['bookList'] = $this->services->getLimitByType(self :: $_SERVICES_TYPE, $perpage, $offset);
-        $this->app_data['pagination'] = $pagination;
-        $this->my_layout->setPageTitle('User Home');
-        $this->my_layout->view('/user/hotel', $this->app_data);
+        
     }
 
 }

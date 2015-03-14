@@ -1,5 +1,7 @@
 <?php
-class w_store{
+class w_store extends mabstract{
+	
+	private static $store_default = "en";
 	public function __constructor(){
 		$this->load->library('session');
 	}
@@ -8,13 +10,14 @@ class w_store{
 		$store_code = $this->session->userdata('store_code');
 
 		if(!$store_code){
-			$store_code = $this->getOptions()[0]["code"];
+			$store_code = $this->getOptions()[self :: $store_default]["code"];
 			$this->session->set_userdata('store_code',$store_code);
 		}
 
 		return $store_code;
 	}
-	public function getOptions(){
+	public function getOptions()
+	{
 		
 		return array(
 			"vi" => array(
