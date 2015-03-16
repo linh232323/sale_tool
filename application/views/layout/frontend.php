@@ -1,7 +1,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Bootstrap, from Twitter</title>
+        <title>Genuine Tours</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
@@ -170,9 +170,9 @@
                 <div class="span10">
                     <div class="row-fluid">
                         <ul class="breadcrumb">
-                            <li><a href="#">Home</a> <span class="divider">/</span></li>
-                            <li><a href="#">Library</a> <span class="divider">/</span></li>
-                            <li class="active">Data</li>
+                            <li>Home <span class="divider">/</span></li>
+                            <li><?php echo $this->uri->segment(2) ?> <span class="divider">/</span></li>
+                            <li class="active"><?php echo $this->uri->segment(3)?></li>
                         </ul>
                     </div>
                     <?php echo $app_content_for_layout; ?>

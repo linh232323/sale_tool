@@ -3,6 +3,9 @@
 class MY_Model extends CI_Model {
 
     protected $_table = '';
+    
+    protected $_page_size;
+    protected $_offset;
 
     function __construct() {
         parent::__construct();
@@ -31,13 +34,26 @@ class MY_Model extends CI_Model {
         $a_tables = $this->db->list_tables();
         return $a_tables;
     }
+    
+     public function setPageSize($page_size)
+    {
+        $this->_page_size = $page_size;
+        return $this;
+    }
+
+    public function setOffset($offset)
+    {
+        $this->_offset = $offset;
+        return $this;
+    }
+
 
     //--- Lấy tất cả dữ liệu
-    function getAllData($off = '', $limit = '') {
+    function getAllData() {
         $this->db->select('*');
         $this->db->from($this->_table);
-        if ($limit != '' && $off != '') {
-            $this->db->limit($off, $limit);
+        if (!empty($this->_page_size) || !empty($this->_offset)) {
+            $this->db->limit($this->_page_size,$this->_offset);
         }
         
         $query = $this->db->get();

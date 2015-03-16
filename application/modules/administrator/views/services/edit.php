@@ -12,29 +12,77 @@
     <?php endif; ?>
     <div>
         <form class="navbar-form form-horizontal" action="/index.php/administrator/servicesitem/save_service" method="post">
-            <input type="hidden" name="id" class="form-control" value="<?php echo $id ?>" />
+            <input type="hidden" id="id" name="service-data[id]" class="form-control" value="<?php echo $id ?>" />
                         
             <div class="well">
                 <div class="control-group">
-                    <label for="customer-count" class="control-label">Name:</label>
+                    <label for="customer-count" class="control-label">Tên:</label>
                     <div class="controls">
                         <div class="input-prepend">
                             <span class="add-on"><i class="icon-user"></i></span>
-                            <input type="text" name="service-name" class="form-control" value="<?php echo $title ?>" />
+                            <input type="text" name="service-data[name]" class="form-control" value="<?php echo $title ?>" />
                         </div>
 
                     </div>
                 </div>
                 <div class="control-group">
-                    <label for="location_a" class="control-label">Location From:</label>
+                    <label for="thumbnail_url" class="control-label">Hình đại diện:</label>
+                    <div class="controls">
+                        <input id="thumbnail_url" type="text" name="service-data[thumbnail_url]" class="form-control image-selector" value="<?php echo $service_data->getData('thumbnail_url') ?>" />
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <label for="location_a" class="control-label">Từ:</label>
                     <div class="controls">
                         <?php echo $location_a; ?>
                     </div>
                 </div>
                 <div class="control-group">
-                    <label for="location_b" class="control-label">Location To:</label>
+                    <label for="location_b" class="control-label">Đến:</label>
                     <div class="controls">
                         <?php echo $location_b; ?>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label for="description" class="control-label">Mô tả:</label>
+                    <div class="controls">
+                        <textarea id="description" type="text" name="service-data[description]" class="form-control ckeditor"><?php echo $service_data->getData('description') ?></textarea>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label for="appendix" class="control-label">Phụ lục:</label>
+                    <div class="controls">
+                        <textarea id="appendix" type="text" name="service-data[appendix]" class="form-control ckeditor" ><?php echo $service_data->getData('appendix') ?></textarea>
+                    </div>
+                </div>
+               <div class="control-group">
+                    <label for="thumbnail_url" class="control-label">Hình:</label>
+                    <div class="controls">
+                        <div class="row-fluid slideshow-group">
+                            <div class="span2 slideshow-item">
+                                <div class="slideshow-img-group">
+                                    <img class="slideshow-img" src=""/>
+                                </div>
+                                <input type="hidden" class="slideshow-id" value=""/>
+                                <div class="action-group btn-group">
+                                    <button class="span6 btn btn-danger  slideshow-delete">
+                                        <i class="icon-white icon-trash"></i>
+                                    </button>
+                                    <button class="span6 btn btn-success  slideshow-update">
+                                        <i class="icon-ok icon-white"></i>
+                                    </button>
+                                </div>
+                                
+                            </div>
+                            <div class="span1">
+                                <button class="btn btn-primary slideshow-add">
+                                <i class="icon-plus-sign icon-white"></i>
+                                 Add
+                            </button>
+                            </div>
+                        </div>
+                       
                     </div>
                 </div>
 
@@ -164,4 +212,6 @@
             }
         });
     }
+
+
 </script>

@@ -2,9 +2,7 @@
 
 class mabstract extends MY_Model {
     public $_data;
-    
-    protected $_page_size;
-    protected $_offset;
+
 
     function __construct() {
         parent::__construct();
@@ -13,7 +11,8 @@ class mabstract extends MY_Model {
     public  function getTable(){
         return $this->_table;
     }
-    function delete(){
+    
+    public function delete(){
         if(!empty($this->_data)){     
             $this->setValue('deleted',true);
             $this->save();
@@ -23,7 +22,7 @@ class mabstract extends MY_Model {
         }
     }
 
-    function counts($attributes){
+    public function counts($attributes){
         $this->db->from($this->getTable());
 
         foreach($attributes as $key => $value){
@@ -33,8 +32,8 @@ class mabstract extends MY_Model {
         return $this->db->count_all_results();
     }
     
-    function load($id){
-         $this->db->select('*');
+    public function load($id){
+        $this->db->select('*');
         $this->db->from($this->getTable());
         $this->db->where('id', $id);
         $this->db->where('deleted',0);
@@ -50,33 +49,23 @@ class mabstract extends MY_Model {
         
     }
 
-    public function setPageSize($page_size)
-    {
-        $this->_page_size = $page_size;
-        return $this;
-    }
-
-    public function setOffset($offset)
-    {
-        $this->_offset = $offset;
-        return $this;
-    }
-
-
+   
 
     //--- Lấy tất cả dữ liệu
-    function getAllData($offset = null, $page_size = null) {
-        $this->_offset = $offset;
-        $this->_page_size = $page_size;
+    function getAllData() {
 
         $this->db->select('*');
         $this->db->from($this->getTable());
         $this->db->where('deleted',0);
-        if (isset($this->_offset) && isset($this->_page_size)) {
-            $this->db->limit($this->_offset, $this->_page_size);
-        }        
+         if (!empty($this->_page_size) || !empty($this->_offset)) {
+         
+            $this->db->limit( $this->_page_size, $this->_offset);
+        }         
         $query = $this->db->get();
+
+
         $data = $query->result();
+
         return $data;
     }
 

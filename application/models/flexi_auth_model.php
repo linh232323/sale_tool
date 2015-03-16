@@ -35,18 +35,7 @@
 class Flexi_auth_model extends Flexi_auth_lite_model
 {
 	public function __construct() {}
-        
-    //--- Lấy tất cả dữ liệu
-    function getAllData($off = '', $limit = '') {
-            $this->db->select('*');
-            $this->db->from('user_accounts');
-            if ($limit != '' && $off != '') {
-                $this->db->limit($off, $limit);
-            }        
-            $query = $this->db->get();
-            $data = $query->result();
-            return $data;
-        }
+
 	###++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++###	
 	// TOKEN GENERATION
 	###++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++###	

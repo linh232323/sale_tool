@@ -39,6 +39,25 @@ class My_layout {
             $this->app_a_default_js = $a_js;
         }
     }
+    function addBackendJs($js){
+         if(!is_array($this->app_a_backend_js))
+            $this->app_a_backend_js = array();
+
+        if(!empty($js))
+            $this->app_a_backend_js[] = $js;
+
+        return $this;
+    }
+    function addDefaultJs($js){
+        if(!is_array($this->app_a_default_js))
+            $this->app_a_default_js = array();
+
+        if(!empty($js))
+            $this->app_a_default_js[] = $js;
+
+        return $this;
+
+    }
 
     function setDefaultCss($a_css) {
         if (!is_array($a_css)) {
@@ -63,6 +82,32 @@ class My_layout {
             $this->app_a_frontend_css = $a_css;
         }
     }
+
+    function addFrontendCss($css) {
+        if (!is_array($this->app_a_frontend_css)) {
+            $this->app_a_frontend_css = array();
+        }
+
+        if(!empty($css)){
+            $this->app_a_frontend_css[] = $css;
+            
+        }
+        return $this;
+        
+    }
+
+    function addFrontendJs($js) {
+        if (!is_array($this->app_a_frontend_js)) {
+            $this->app_a_frontend_js = array();
+        } 
+
+        if(!empty($js))
+            $this->app_a_frontend_js[] = $js;
+
+        return $this;
+        
+    }
+
 
     function setBackendJs($a_js) {
         if (!is_array($a_js)) {

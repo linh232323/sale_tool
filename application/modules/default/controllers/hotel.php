@@ -10,6 +10,7 @@ class Hotel extends Default_Controller {
         parent::__construct();
         $this->load->model("services");
         $this->load->model("w_hotel");
+        $this->load->model('w_slideshows');
         $this->load->library('pagination');
     }
 
@@ -18,18 +19,18 @@ class Hotel extends Default_Controller {
 
         $perpage = 5;      
 
-        $offset = ($this->uri->segment(4) == '') ? 0 : $this->uri->segment(4);
+        $offset = ($this->uri->segment(4) == '') ? 1 : $this->uri->segment(4);
        
         $hotels =  $this
                         ->w_hotel
                         ->setPageSize($perpage)
-                        ->setOffset($offset)
-                        ->getItems();
+                        ->setOffset(($offset - 1 ) * $perpage)
+                        ->getItems(self :: $_SERVICES_TYPE);
 
         $this->app_data['hotels'] = $hotels;
 
         $config['total_rows'] = $this->w_hotel->counts(array(
-            "service_type_id" => 1,
+            "service_type_id" => self :: $_SERVICES_TYPE,
             "deleted" => 0
         ));
 
@@ -51,18 +52,21 @@ class Hotel extends Default_Controller {
     }
 
     public function detail($idr = 1){
-        
-        $serviceModel = $this->services->load($idr);
+        $this->my_layout->addFrontendJs('jssor')
+                        ->addFrontendJs('jssor.slider'); 
+
+        $service = $this->services->load($idr);
        
         $this->app_data['id'] = $idr;
-        
-        $this->app_data['hotel'] = $serviceModel;
+        $this->app_data['hotel'] = $service;
+        $this->app_data['slideshows'] = $this->w_slideshows->getItems($service->getData('id'));
         $this->my_layout->setPageTitle('Hotel');
+
         $this->my_layout->view('/hotel/detail', $this->app_data);
     }
 
     public function index() {
-        
+        $this->search();    
     }
 
 }

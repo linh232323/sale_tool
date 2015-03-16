@@ -4,12 +4,18 @@ class Admin_Controller extends MY_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->auth = new stdClass;
+
+        $this->my_layout->addDefaultJs('ckeditor/ckeditor');
+        $this->my_layout->addDefaultJs('ckfinder/ckfinder');
+        
+        $this->my_layout->addBackendJs('main');
+        
+        
         
         $this->my_layout->setPageTitle("SALE TOOL");
         $this->load->library(array("email", "session","flexi_auth_lite", "flexi_auth"));
         $this->load->helper(array('my_pagination'));
-
+        $this->auth = new stdClass;
         if ($this->app_action == 'add' || $this->app_action == 'update') {
             $this->load->library('form_validation');
             $this->form_validation->CI = & $this;
@@ -20,7 +26,7 @@ class Admin_Controller extends MY_Controller {
         $this->app_data['login_url'] = $this->app_base_url . $this->app_module . "/login";
 
         if ($this->app_controller != 'login') {
-            $this->load->library('flexi_auth');
+            
             // Check user is logged in as an admin.
             // For security, admin users should always sign in via Password rather than 'Remember me'.
             if (!$this->flexi_auth->is_logged_in_via_password() || !$this->flexi_auth->is_admin()) {

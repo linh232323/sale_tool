@@ -9,8 +9,16 @@ class eav_model extends mabstract{
 	}
 
 	
+	public function addAttributeCode($attribute_code){
+		if(!is_array($this->_attributes))
+			$this->_attributes = array();
 
+		$this->_attributes[] = $attribute_code;
+	}
 	public  function setAttributeCodes(){
+		if(!is_array($this->_attributes))
+			$this->_attributes = array();
+
 	}
 
 	public function getTable(){
@@ -59,11 +67,9 @@ class eav_model extends mabstract{
 		$this->beforeLoad();
 
 		parent::load($id);
-
 		$this->loadAttributes();
 
 		$this->afterLoad();
-
 	}
 
 	public function beforeLoad(){

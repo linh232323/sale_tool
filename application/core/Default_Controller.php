@@ -10,7 +10,7 @@ class Default_Controller extends MY_Controller {
         $this->load->model("w_localize");
         $this->load->model("w_menu_item");
 
-        $this->my_layout->setPageTitle("SALE TOOL User Manager");
+        $this->my_layout->setPageTitle("Genuine Tours");
         $this->load->library(array("email", "session", "my_auth", 'pagination'));
         $this->load->helper(array('my_pagination'));
 

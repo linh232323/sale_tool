@@ -2,11 +2,14 @@
 
 class Hotel extends Admin_Controller {
     static $_SERVICES_TYPE = 1;
+    
     function __construct() {
         parent::__construct();
         
         $this->load->model("services");
         $this->load->model("services_price");
+
+        $this->load->library('pagination');
     }
 
     function listing() {

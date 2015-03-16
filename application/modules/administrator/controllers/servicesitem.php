@@ -9,8 +9,11 @@ class Servicesitem extends Admin_Controller {
         $this->load->model("services_price");
         
         $this->load->model("services");
+        $this->load->model("w_services");
         $this->load->model("location");
         $this->load->helper('selection_helper');
+
+        $this->load->model("w_slideshows");
     }
 
     function edit() {
@@ -63,6 +66,7 @@ class Servicesitem extends Admin_Controller {
         }
         
         $serviceModel = $this->services->load($id);
+
         $location_model = $this->location->getAllData();
         
         $this->app_data['headers'] = $headers;
@@ -73,34 +77,28 @@ class Servicesitem extends Admin_Controller {
         
         
 
-        $this->app_data['location_a'] = toSelection($location_model, $serviceModel->getData()['location_id_a'], 'location location_a' , 'location_a' , 'location_a');
+        $this->app_data['location_a'] = toSelection($location_model, $serviceModel->getData()['location_id_a'], 'location location_a' , 'location_a' , 'service-data[location_id_a]');
 
-        $this->app_data['location_b'] = toSelection($location_model, $serviceModel->getData()['location_id_b'], 'location location_b' , 'location_b' , 'location_b');
+        $this->app_data['location_b'] = toSelection($location_model, $serviceModel->getData()['location_id_b'], 'location location_b' , 'location_b' , 'service-data[location_id_b]');
+
+        $this->w_services->load($id);
+
+        $this->app_data['service_data'] =  $this->w_services;
 
         $this->my_layout->view('/services/edit', $this->app_data);
     }
     
     function save_service(){
-        $id = $this->input->post('id',true);
+
+        $data = $this->input->post("service-data");
+
+        $this->w_services->load($data['id']);
         
-        $location_a = $this->input->post('location_a',true);
+        $this->w_services->setData($data);
         
-        $location_b = $this->input->post('location_b',true);
-        
-        
-        $name = $this->input->post('service-name',true);
-        
-        
-        $this->services->load($id);
-        
-        $this->services->setValue('name',$name);
-        
-        $this->services->setValue('location_id_a', $location_a);
-        
-        $this->services->setValue('location_id_b', $location_b);
-        
-        $this->services->save();
-        redirect('/index.php/administrator/servicesitem/edit?id='.$id, 'refresh');
+        $this->w_services->save();
+
+        redirect('administrator/servicesitem/edit?id='.$id, 'refresh');
 
     }
     function add_item(){
@@ -165,7 +163,7 @@ class Servicesitem extends Admin_Controller {
         redirect('/index.php/administrator/servicesitem/edit?id='.$id, 'refresh');
 
     }
-
+    
 
     function delete_item(){
         $item_id = $this->input->post('id');

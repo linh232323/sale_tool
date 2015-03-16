@@ -23,7 +23,7 @@ class MY_Controller extends MX_Controller {
         $this->load->helper('string');
 
 
-        $this->my_layout->setDefaultJs(array('jquery-1.8.2.min', 'jquery.livequery.min', 'qho.src', 'dataTable.boostrap', 'bootstrap-datepicker', 'app')); // asset/public/css
+        $this->my_layout->setDefaultJs(array('jquery-1.9.1.min', 'jquery.livequery.min', 'dataTable.boostrap', 'bootstrap-datepicker', 'app')); // asset/public/css
         $this->my_layout->setDefaultCss(array('style', 'dataTable.boostrap', 'datepicker')); // asset/public/css
         $this->my_layout->setPageTitle("SALE Administrator");
         $this->my_layout->setLayout("layout/backend_default", $this->app_data);

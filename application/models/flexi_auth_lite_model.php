@@ -33,7 +33,6 @@
 
 class Flexi_auth_lite_model extends mabstract
 {
-    
 	public function __construct()
 	{
 		$this->load->database();
@@ -45,7 +44,7 @@ class Flexi_auth_lite_model extends mabstract
 		###++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++###
 		
 		// Sessions and cookies
-                $this->auth->session_name =  $this->config->item('sessions','flexi_auth');
+		$this->auth->session_name = $this->config->item('sessions','flexi_auth');
 		$this->auth->cookie_name = $this->config->item('cookies','flexi_auth');
 	
 		// Get the current auth session, else get the default values

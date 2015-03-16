@@ -11,11 +11,11 @@ function __construct() {
     }
 
     //--- Lấy tất cả dữ liệu
-    function getAllData($off = '', $limit = '') {
+    function getAllData() {
         $this->db->select('*');
         $this->db->from($this->_table);
-        if ($limit != '' && $off != '') {
-            $this->db->limit($off, $limit);
+        if (!empty($this->_page_size) || !empty($this->_offset)) {
+            $this->db->limit($this->_page_size,$this->_offset);
         }
         $this->db->order_by('username', 'asc');
         $query = $this->db->get();
