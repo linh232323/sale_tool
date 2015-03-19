@@ -2,7 +2,7 @@
 
 class mabstract extends MY_Model {
     public $_data;
-
+    public $_cols;
 
     function __construct() {
         parent::__construct();
@@ -39,14 +39,17 @@ class mabstract extends MY_Model {
         $this->db->where('deleted',0);
         
         $query = $this->db->get();
-        if ($query && $row = $query->row()){            
-            $this->setData((array)$row);
+        $this->_cols = array();
+        if ($query && $row = $query->row()){
+            foreach($row as $key => $value){
+                $this->setData($key,$value);
+                $this->_cols[] = $key;
+            }
             return $this;
         }   
         else {
             return false;
         }
-        
     }
 
    
@@ -86,7 +89,7 @@ class mabstract extends MY_Model {
      */
     function add($data = array()) {
         if (!empty($data)) {
-            if ($this->db->insert($this->_table, $data)){
+            if ($this->db->insert($this->getTable(), $data)){
                 $id = $this->db->insert_id(); 
                 $this->_data['id'] = $id;
                 return $id;
@@ -109,7 +112,18 @@ class mabstract extends MY_Model {
     function update($data = array(), $id = '') {
         if (!empty($data) && $id != '' && is_numeric($id)) {
             $this->db->where('id', $id);
-            if ($this->db->update($this->getTable(), $data))
+            $update = array();
+            foreach($data as $key => $value){
+
+                if(!in_array($key,$this->_cols)){
+                    continue;
+                } 
+
+                $update[$key] = $value;
+    
+            }
+
+            if ($this->db->update($this->getTable(), $update))
                 return $id;
             else
                 return FALSE;
@@ -127,15 +141,19 @@ class mabstract extends MY_Model {
     }
     
     public function setData($key, $value = null){
-        if(!isset($this->_data )){
-
+        if(!is_array($this->_data )){
             $this->_data = array();
         }
-        
-        if(!isset($value))
-            $this->_data = $key;
-        else
+
+        if(!isset($value) && is_array($key) ){
+            foreach($key as $k => $v){
+                $this->setValue($k,$v);   
+            }
+        } else if (isset($value)){
             $this->_data[$key] = $value;
+        }
+
+        return $this;
 
     }
     

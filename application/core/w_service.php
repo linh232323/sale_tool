@@ -13,6 +13,8 @@ class w_service extends eav_model{
 
 		$this->_attributes[] ='thumbnail_url';
 
+		$this->_attributes[] ='short_description';
+
 		$this->_attributes[] ='description';
 
 		$this->_attributes[] ='appendix';

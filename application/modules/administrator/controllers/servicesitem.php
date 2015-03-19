@@ -72,18 +72,20 @@ class Servicesitem extends Admin_Controller {
         $this->app_data['headers'] = $headers;
         $this->app_data['data'] = $data;
         $this->app_data['id'] = $id;
-        $this->app_data['title'] = $serviceModel->getData()['name'];
-        $this->app_data['type'] = $serviceModel->getData()['service_type_id'];
+        $this->app_data['title'] = $serviceModel->getData('name');
+        $this->app_data['type'] = $serviceModel->getData('service_type_id');
         
         
 
-        $this->app_data['location_a'] = toSelection($location_model, $serviceModel->getData()['location_id_a'], 'location location_a' , 'location_a' , 'service-data[location_id_a]');
+        $this->app_data['location_a'] = toSelection($location_model, $serviceModel->getData('location_id_a'), 'location location_a' , 'location_a' , 'service-data[location_id_a]');
 
-        $this->app_data['location_b'] = toSelection($location_model, $serviceModel->getData()['location_id_b'], 'location location_b' , 'location_b' , 'service-data[location_id_b]');
+        $this->app_data['location_b'] = toSelection($location_model, $serviceModel->getData('location_id_b'), 'location location_b' , 'location_b' , 'service-data[location_id_b]');
 
         $this->w_services->load($id);
 
         $this->app_data['service_data'] =  $this->w_services;
+
+        $this->app_data['slideshows'] = $this->w_slideshows->getItems($id);
 
         $this->my_layout->view('/services/edit', $this->app_data);
     }
@@ -98,7 +100,7 @@ class Servicesitem extends Admin_Controller {
         
         $this->w_services->save();
 
-        redirect('administrator/servicesitem/edit?id='.$id, 'refresh');
+        redirect('administrator/servicesitem/edit?id='.$data['id'], 'refresh');
 
     }
     function add_item(){
@@ -115,7 +117,9 @@ class Servicesitem extends Admin_Controller {
         $this->services_price->setValue('date_to',date('Y-m-d'));
 
         $this->services_price->setValue('service_type_id',$serviceModel->getData()['service_type_id']);
+        
         $this->services_price->save();
+
         redirect('/index.php/administrator/servicesitem/edit?id='.$id, 'refresh');
 
     }

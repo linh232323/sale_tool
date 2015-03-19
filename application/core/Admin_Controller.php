@@ -25,17 +25,17 @@ class Admin_Controller extends MY_Controller {
         // If not Login
         $this->app_data['login_url'] = $this->app_base_url . $this->app_module . "/login";
 
-        if ($this->app_controller != 'login') {
+        // if ($this->app_controller != 'login') {
             
-            // Check user is logged in as an admin.
-            // For security, admin users should always sign in via Password rather than 'Remember me'.
-            if (!$this->flexi_auth->is_logged_in_via_password() || !$this->flexi_auth->is_admin()) {
-                // Set a custom error message.
-                $this->flexi_auth->set_error_message('You must login as an admin to access this area.', TRUE);
-                $this->session->set_flashdata('message', $this->flexi_auth->get_messages());
-                redirect($this->app_data['login_url']);
-            }
-        }
+        //     // Check user is logged in as an admin.
+        //     // For security, admin users should always sign in via Password rather than 'Remember me'.
+        //     if (!$this->flexi_auth->is_logged_in_via_password() || !$this->flexi_auth->is_admin()) {
+        //         // Set a custom error message.
+        //         $this->flexi_auth->set_error_message('You must login as an admin to access this area.', TRUE);
+        //         $this->session->set_flashdata('message', $this->flexi_auth->get_messages());
+        //         redirect($this->app_data['login_url']);
+        //     }
+        // }
         /* End Authenticate */
     }
 

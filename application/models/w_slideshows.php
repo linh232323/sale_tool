@@ -10,11 +10,13 @@ class w_slideshows extends mabstract{
     }
 
     public function getItems($service_id){
+
     	$this->db->select('*');
         $this->db->from($this->getTable());
         $this->db->where('service_id',$service_id);
         $query = $this->db->get();
-        return $query->result();
+        $result =  $query->result();
+        return $result;
     }
 }
 ?>
