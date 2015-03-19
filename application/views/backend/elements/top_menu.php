@@ -2,85 +2,85 @@
 $a_top_menu = array(
     array(
         'name' => 'Orders',
-        'url'  => '/index.php/administrator/order/create',
+        'url'  => '/administrator/order/create',
         'submenu' => array(
             array(
                 'name' => 'Thêm',
-                'url'  => '/index.php/administrator/order/create'
+                'url'  => '/administrator/order/create'
             ),
             array(
                 'name' => 'Danh sách',
-                'url'  => '/index.php/administrator/order/listing'
+                'url'  => '/administrator/order/listing'
             )
         )
     ),
     array(
         'name' => 'Khách sạn',
-        'url'  => '/index.php/administrator/hotel/listing',
+        'url'  => '/administrator/hotel/listing',
         'submenu' => array(
             array(
                 'name' =>'Thêm',
-                'url'  => '/index.php/administrator/servicesitem/add_service?id=1'
+                'url'  => '/administrator/servicesitem/add_service?id=1'
             ),
             array(
                 'name' => 'Danh sách',
-                'url'  => '/index.php/administrator/hotel/listing'
+                'url'  => 'administrator/hotel/listing'
             )
         )
     ),
     array(
         'name' => 'Nhà hàng',
-        'url'  => '/index.php/administrator/restaurent/listing',
+        'url'  => '/administrator/restaurent/listing',
         'submenu' => array(
             array(
                 'name' => 'Thêm',
-                'url'  => '/index.php/administrator/servicesitem/add_service?id=2'
+                'url'  => '/administrator/servicesitem/add_service?id=2'
             ),
             array(
                 'name' => 'Danh sách',
-                'url'  => '/index.php/administrator/restaurent/listing'
+                'url'  => '/administrator/restaurent/listing'
             )
         )
     ),
     array(
         'name' => 'Địa điểm tour',
-        'url'  => '/index.php/administrator/tour/listing',
+        'url'  => '/administrator/tour/listing',
         'submenu' => array(
             array(
                 'name' => 'Thêm',
-                'url'  => '/index.php/administrator/servicesitem/add_service?id=3'
+                'url'  => '/administrator/servicesitem/add_service?id=3'
             ),
             array(
                 'name' => 'Danh sách',
-                'url'  => '/index.php/administrator/tour/listing'
+                'url'  => '/administrator/tour/listing'
             )
         )
     ),
     array(
         'name' => 'Phuơng tiện',
-        'url'  => '/index.php/administrator/transportation/listing',
+        'url'  => '/administrator/transportation/listing',
         'submenu' => array(
             array(
                 'name' => 'Thêm',
-                'url'  => '/index.php/administrator/servicesitem/add_service?id=4'
+                'url'  => '/administrator/servicesitem/add_service?id=4'
             ),
             array(
                 'name' => 'Danh sách',
-                'url'  => '/index.php/administrator/transportation/listing'
+                'url'  => '/administrator/transportation/listing'
             )
         )
     ),
     array(
         'name' => 'Bảo hiểm',
-        'url'  => '/index.php/administrator/insurance/listing',
+        'url'  => '/administrator/insurance/listing',
         'submenu' => array(
             array(
                 'name' => 'Thêm',
-                'url'  => '/index.php/administrator/servicesitem/add_service?id=5'
+                'url'  => '/administrator/servicesitem/add_service?id=5'
             ),
             array(
                 'name' => 'Danh sách',
-                'url'  => '/index.php/administrator/insurance/listing'
+                'url'  => '/administrator/insurance/listing'
             )
         )
     ),
@@ -90,25 +90,25 @@ $a_top_menu = array(
         'submenu' => array(
             array(
                 'name' => 'New',
-                'url'  => '/index.php/administrator/account/create'
+                'url'  => '/administrator/account/create'
             ),
             array(
                 'name' => 'List',
-                'url'  => '/index.php/administrator/account/listing'
+                'url'  => '/administrator/account/listing'
             )
         )
     ),
     array(
         'name' => 'Địa điểm',
-        'url'  => '/index.php/administrator/locations/listing',
+        'url'  => '/administrator/locations/listing',
         'submenu' => array(
             array(
                 'name' => 'Thêm',
-                'url'  => '/index.php/administrator/locations/create'
+                'url'  => '/administrator/locations/create'
             ),
             array(
                 'name' => 'Danh sách',
-                'url'  => '/index.php/administrator/locations/listing'
+                'url'  => '/administrator/locations/listing'
             )
         )
     ),

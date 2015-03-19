@@ -24,7 +24,7 @@
         </ul>
         <div class="tab-content well">
             <div class="tab-pane active" id="tab-general">
-                <form class="navbar-form form-horizontal" action="/index.php/administrator/servicesitem/save_service" method="post">
+                <form class="navbar-form form-horizontal" action="/administrator/servicesitem/save_service" method="post">
                     <input type="hidden" id="id" name="service-data[id]" class="form-control" value="<?php echo $id ?>" />
                                 
                     <div class="control-group">
@@ -223,7 +223,7 @@
        
         $.ajax({
             type: "POST",
-            url: "/index.php/administrator/servicesitem/delete_item", //Relative or absolute path to response.php file
+            url: "/administrator/servicesitem/delete_item", //Relative or absolute path to response.php file
             data:   'id='                       + tr.find('.id').html(),
             success: function (data) {
                location.reload();
@@ -236,7 +236,7 @@
         
         $.ajax({
             type: "POST",
-            url: "/index.php/administrator/servicesitem/save_item", //Relative or absolute path to response.php file
+            url: "/administrator/servicesitem/save_item", //Relative or absolute path to response.php file
             data:   'id='                       + tr.find('.id').html() +
                     '&date_from='               + tr.find('.date_from').val() +
                     '&date_to='                 + tr.find('.date_to').val() +

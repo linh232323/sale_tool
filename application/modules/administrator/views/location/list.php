@@ -33,8 +33,8 @@
                 <?php endforeach; ?>
                 <td>
                     <div class="btn-group">
-                        <a class="btn btn-success"  href="/index.php/administrator/<?php echo $controller; ?>/edit?id=<?php echo $loc['id']; ?>"><i class="icon-white icon-edit"></i></a>
-                        <a class="btn btn-danger"  href="/index.php/administrator/<?php echo $controller; ?>/delete?id=<?php echo $loc['id']; ?>"><i class="icon-white icon-trash"></i></a>                        
+                        <a class="btn btn-success"  href="/administrator/<?php echo $controller; ?>/edit?id=<?php echo $loc['id']; ?>"><i class="icon-white icon-edit"></i></a>
+                        <a class="btn btn-danger"  href="/administrator/<?php echo $controller; ?>/delete?id=<?php echo $loc['id']; ?>"><i class="icon-white icon-trash"></i></a>                        
                     </div>
                 </td>
                 <?php ?>

@@ -24,7 +24,7 @@
                 <?php endforeach; ?>
                 <td>
                     <div class="btn-group">
-                        <a class="btn btn-success"  href="/index.php/administrator/<?php echo $controller; ?>/edit?id=<?php echo $service['id']; ?>"><i class="icon-white icon-edit"></i></a>
+                        <a class="btn btn-success"  href="/administrator/<?php echo $controller; ?>/edit?id=<?php echo $service['id']; ?>"><i class="icon-white icon-edit"></i></a>
                     </div>
                 </td>
                 <?php ?>
@@ -93,7 +93,7 @@
        
         $.ajax({
             type: "POST",
-            url : "/index.php/administrator/servicesitem/delete_service", 
+            url : "/administrator/servicesitem/delete_service", 
             data:   'id='                       + tr.find('.id').html(),
             success: function (data) {
              

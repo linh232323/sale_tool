@@ -32,8 +32,8 @@
                 <td><?php echo $order->employee_name;?></td>
                 <td>
                     <div class="btn-group">
-                        <a class="btn btn-success"  href="/index.php/administrator/order/place?id=<?php echo $order->id; ?>"><i class="icon-white icon-edit"></i></a>
-                        <a class="btn btn-danger" href="/index.php/administrator/order/delete?id=<?php echo $order->id; ?>"><i class="icon-white icon-trash"></i></a>
+                        <a class="btn btn-success"  href="/administrator/order/place?id=<?php echo $order->id; ?>"><i class="icon-white icon-edit"></i></a>
+                        <a class="btn btn-danger" href="/administrator/order/delete?id=<?php echo $order->id; ?>"><i class="icon-white icon-trash"></i></a>
                     </div>
                 </td>
             </tr>

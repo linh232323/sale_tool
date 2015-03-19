@@ -28,8 +28,8 @@
                 <td><?php echo $user['email']; ?></td>
                 <td>
                     <div class="btn-group">
-                        <a class="btn btn-success"  href="/index.php/administrator/account/edit?id=<?php echo $user['id']; ?>"><i class="icon-white icon-edit"></i></a>
-                        <a class="btn btn-danger" href="/index.php/administrator/account/delete?id=<?php echo $user['id']; ?>"><i class="icon-white icon-trash"></i></a>
+                        <a class="btn btn-success"  href="/administrator/account/edit?id=<?php echo $user['id']; ?>"><i class="icon-white icon-edit"></i></a>
+                        <a class="btn btn-danger" href="/administrator/account/delete?id=<?php echo $user['id']; ?>"><i class="icon-white icon-trash"></i></a>
                     </div>
                 </td>
             </tr>
